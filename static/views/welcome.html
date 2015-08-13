@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        window.$ = window.jQuery = require('../js/jquery.js');
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.js"></script>
+    <title>Welcome - beam.io</title>
+    <style type="text/css">
+        body {
+            background-color: #ecf0f1;
+        }
+
+        body > .grid {
+            height: 100%;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui red header">
+                Welcome to beam.io
+            </h2>
+
+            <div class="ui message">
+                Beam.io is almost ready to connect. We just need to know where you want to connect, and a couple of other details.
+            </div>
+
+            <form class="ui large form">
+                <div class="ui stacked segment">
+                    <h3>Server Settings</h3>
+                    <div class="grouped fields">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="world icon"></i>
+                                <input type="url" name="password" placeholder="Network">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="ssl">
+                                <label>SSL/TLS</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    <h3>User Settings</h3>
+                    <div class="grouped fields">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="nick" placeholder="Nickname" autocomplete="nickname">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui fluid multiple search selection dropdown chans">
+                                <input name="tags" type="hidden">
+                                <div class="default text">Channels</div>
+                                <div class="menu">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui small info message">
+                            By default, port 6667 (6697 for SSL/TLS) will be used. If you need to use another port, enable
+                            <em>advanced mode</em>.
+                        </div>
+                    </div>
+                    <div class="ui fluid large red submit button">Connect</div>
+                </div>
+
+                <div class="ui error message"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="ui bottom right attached label">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" id="advanced">
+            <label>Advanced Mode</label>
+        </div>
+    </div>
+    <script>
+        $('.ui.dropdown.chans')
+            .dropdown({
+                allowAdditions: true
+            });
+    </script>
+</body>
+
+</html>
