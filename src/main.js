@@ -24,7 +24,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 600, height: 700});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/static/views/chat.html');
+  mainWindow.loadUrl('file://' + __dirname + '/app/views/chat.html');
 
   // Open the devtools.
   //mainWindow.openDevTools();

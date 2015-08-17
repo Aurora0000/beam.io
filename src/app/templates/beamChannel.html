@@ -1,0 +1,17 @@
+<div class="ui top attached inverted menu" style="border-radius: 0;">
+  <div class="item">
+    <h3 ng-bind="::channelCtrl.channel"></h3>
+  </div>
+  <div class="item">
+    <p ng-bind="channelCtrl.topic"></p>
+  </div>
+</div>
+<div class="ui grid">
+  <div class="eleven wide column">
+    <beam-message-list channel="{{channelCtrl.channel}}"></beam-message-list>
+  </div>
+  <div class="five wide column">
+    <beam-user-list channel="{{channelCtrl.channel}}"></beam-user-list>
+  </div>
+</div>
+<beam-message-box channel="{{channelCtrl.channel}}"></beam-message-box>

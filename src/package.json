@@ -1,0 +1,24 @@
+{
+  "name": "beam.io",
+  "version": "0.1.0",
+  "description": "IRC for the 21st century",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/Aurora0000/beam.io",
+  "author": "Aurora0000",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "~0.30.4",
+    "gulp": "~3.9.0",
+    "gulp-electron": "~0.0.8"
+  },
+  "dependencies": {
+    "irc": "~0.3.12",
+    "moment": "~2.10.6",
+    "md5": "~2.0.0",
+    "js-yaml": "~3.3.1",
+    "homedir": "~0.6.0"
+  }
+}

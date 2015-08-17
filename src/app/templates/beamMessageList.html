@@ -1,0 +1,18 @@
+<div class="ui relaxed list scrollable">
+  <div class="item" ng-repeat="message in messageListCtrl.messages">
+    <div class="flex box">
+      <div class="flex for avatar">
+        <img ng-src="{{::('data:image/png;base64,' + message.identicon)}}" style="margin-left: auto; margin-right: auto; display: block;" class="ui mini circular image">
+        {{::message.nick}}
+      </div>
+      <div class="flex for message">
+        <div class="ui segment">
+          <span ng-bind="::message.message">
+          </span>
+
+          <div class="ui bottom right attached label"><span am-time-ago="message.time"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
