@@ -20,19 +20,47 @@ angular.module('beam.directives')
             nick: nick,
             message: text,
             time: new Date(),
-            identicon: identicon
+            identicon: identicon,
+            type: 'message'
           });
           $scope.$apply();
         }.bind(this));
 
-        $rootScope.$on(('selfMessage' + this.channel), function(event, data) {
+        $rootScope.$on(('selfMessage|' + this.channel), function(event, data) {
           var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
             message: data,
             time: new Date(),
-            identicon: identicon
+            identicon: identicon,
+            type: 'message'
+          });
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on('action', function(from, to, text) {
+          if (to !== this.channel) {
+            return;
+          }
+          var identicon = this.genIdenticon(from).toString();
+          this.messages.push({
+            nick: from,
+            message: text,
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
+          });
+        }.bind(this));
+
+        $rootScope.$on(('selfAction|' + this.channel), function(event, data) {
+          var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: data,
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
           });
         }.bind(this));
       },
