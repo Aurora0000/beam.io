@@ -54,6 +54,13 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this));
 
+        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), function(nick) {
+          this.users = this.users.filter(function(item) {
+            return item.name !== nick;
+          });
+          $scope.$apply();
+        }.bind(this));
+
         $scope.$parent.$parent.clientCtrl.connection.on('+mode', function(channel, by, mode, argument) {
           if (channel !== this.channel) {
             return;
@@ -93,6 +100,15 @@ angular.module('beam.directives')
             }
           }
           $scope.$apply();
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on('quit', function(nick, reason, channels) {
+          if (channels.indexOf(this.channel) !== -1) {
+            this.users = this.users.filter(function(item) {
+              return item.name !== nick;
+            });
+            $scope.$apply();
+          }
         }.bind(this));
       },
       controllerAs: 'userListCtrl'

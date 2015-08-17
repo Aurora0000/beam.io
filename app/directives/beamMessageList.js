@@ -50,6 +50,7 @@ angular.module('beam.directives')
             identicon: identicon,
             type: 'action'
           });
+          $scope.$apply();
         }.bind(this));
 
         $rootScope.$on(('selfAction|' + this.channel), function(event, data) {
@@ -62,6 +63,56 @@ angular.module('beam.directives')
             identicon: identicon,
             type: 'action'
           });
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), function(nick) {
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: 'has joined ' + this.channel,
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
+          });
+          $scope.$apply();
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), function(nick) {
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: 'has left ' + this.channel,
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
+          });
+          $scope.$apply();
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), function(nick, by, reason) {
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: 'has been kicked from ' + this.channel + ' by ' + by + ' (' + reason + ')',
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
+          });
+          $scope.$apply();
+        }.bind(this));
+
+        $scope.$parent.$parent.clientCtrl.connection.on('quit', function(nick, reason, channels) {
+          if (channels.indexOf(this.channel) !== -1) {
+            var identicon = this.genIdenticon(nick).toString();
+            this.messages.push({
+              nick: nick,
+              message: 'has quit (' + reason + ')',
+              time: new Date(),
+              identicon: identicon,
+              type: 'action'
+            });
+            $scope.$apply();
+          }
         }.bind(this));
       },
       controllerAs: 'messageListCtrl'

@@ -12,7 +12,8 @@
   "devDependencies": {
     "electron-prebuilt": "~0.30.4",
     "gulp": "~3.9.0",
-    "gulp-electron": "~0.0.8"
+    "gulp-electron": "~0.0.8",
+    "gulp-atom-electron": "~0.16.0"
   },
   "dependencies": {
     "irc": "~0.3.12",

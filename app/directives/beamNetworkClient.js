@@ -13,7 +13,7 @@ angular.module('beam.directives')
         this.currentChannel = '';
 
         this.connect = function(settings) {
-          return new irc.Client(settings.host, settings.nick, {
+          this.settings = {
             userName: (settings.user || 'beam'),
             realName: (settings.real || 'beam.io IRC (https://github.com/Aurora0000/beam.io)'),
             port: (settings.port || 6667),
@@ -21,8 +21,10 @@ angular.module('beam.directives')
             secure: (settings.tls || false),
             certExpired: (settings.ignoreSecure || false),
             selfSigned: (settings.ignoreSecure || false),
-            channels: (settings.channels || [])
-          });
+            channels: (settings.channels || []),
+            host: settings.host
+          };
+          return new irc.Client(settings.host, settings.nick, this.settings);
         };
 
         this.connection = this.connect({
@@ -31,7 +33,7 @@ angular.module('beam.directives')
           nick: configService.get('nick'),
           channels: configService.get('channels')
         });
-        
+
         this.connection.on('error', function(message) {
           console.log("Error in IRC library: ", message);
         }.bind(this));
