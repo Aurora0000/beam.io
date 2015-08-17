@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var electron = require('gulp-atom-electron');
 
 gulp.task('package-linux-x64', function () {
-	return gulp.src('src/**')
+	return gulp.src('./**')
 		.pipe(electron({ version: '0.30.4', platform: 'linux', arch: 'x64'}))
 		.pipe(electron.zfsdest('release/beam-linux-x64.zip'));
 });
