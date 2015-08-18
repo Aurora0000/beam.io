@@ -84,7 +84,11 @@ angular.module('beam.directives')
         }.bind(this);
 
         this.removeTab = function(channel) {
-          this.channels.splice(this.channels.indexOf(channel), 1);
+          var chan = this.channels.indexOf(channel);
+          // Channel may have alredy been removed on part. check.
+          if (chan !== -1) {
+            this.channels.splice(chan, 1);
+          }
         };
       },
       controllerAs: 'clientCtrl'

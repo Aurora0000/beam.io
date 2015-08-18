@@ -1,0 +1,43 @@
+body {
+  overflow: hidden;
+}
+.message.box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.text.grey {
+  color: #bdc3c7;
+}
+.list.scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 90vh;
+}
+.alternating.list:nth-child(odd) {
+  background: #ffffff;
+}
+.alternating.list > .item:nth-child(even) {
+  background: #efefef;
+}
+.alternating.list > .item {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.column.for.avatar {
+  max-width: 175px;
+}
+.flex.box {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  max-width: 100vw;
+}
+.flex.for.avatar {
+  flex: 0 0 175;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+.flex.for.message {
+  width: 100%;
+}
