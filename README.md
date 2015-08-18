@@ -3,7 +3,7 @@
 [![Dependency Status](https://david-dm.org/Aurora0000/beam.io.svg)](https://david-dm.org/Aurora0000/beam.io)
 [![devDependency Status](https://david-dm.org/Aurora0000/beam.io/dev-status.svg)](https://david-dm.org/Aurora0000/beam.io#info=devDependencies)
 
-Looking for [releases](https://github.com/Aurora0000/beam.io/releases)? Available for Windows, Linux and Mac OS X.
+Looking for :arrow_down:[releases](https://github.com/Aurora0000/beam.io/releases)? Available for Windows, Linux and Mac OS X.
 
 Beam.io is an IRC client powered by 
 [GitHub Electron](https://github.com/atom/electron), 
@@ -36,7 +36,7 @@ creation of beam.io, which we hope has all of these features, and more.
 - Theming system
 - Connection to multiple networks
 
-## For Developers
+## :construction:For Developers:construction:
 ### Building beam.io
 
 ```bash
