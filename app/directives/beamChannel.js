@@ -5,18 +5,21 @@ angular.module('beam.directives')
       templateUrl: '../templates/beamChannel.html',
       scope: {
         channel: '@',
+        host: '@',
       },
-      controller: function($scope) {
+      controller: function($scope, ircService) {
         this.channel = $scope.channel;
+        this.host = $scope.host;
+        this.connection = ircService.get(this.host);
         this.setTopic = function(channel, topic, nick, message) {
           if (channel === this.channel) {
             this.topic = topic;
             $scope.$apply();
           }
         }.bind(this);
-        $scope.$parent.clientCtrl.connection.on('topic', this.setTopic);
+        this.connection.on('topic', this.setTopic);
         $scope.$on('$destroy', function() {
-          $scope.$parent.clientCtrl.connection.removeListener('topic', this.setTopic);
+          this.connection.removeListener('topic', this.setTopic);
         }.bind(this));
       },
 

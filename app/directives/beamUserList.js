@@ -4,11 +4,14 @@ angular.module('beam.directives')
       restrict: 'E',
       templateUrl: '../templates/beamUserList.html',
       scope: {
-        connection: '@',
+        host: '@',
         channel: '@',
       },
-      controller: function($scope, $rootScope) {
+      controller: function($scope, $rootScope, ircService) {
         var md5 = require('md5');
+        this.host = $scope.host;
+        this.connection = ircService.get(this.host);
+
         this.genIdenticon = function(nick) {
           return new Identicon(md5(nick), 100);
         };
@@ -123,23 +126,23 @@ angular.module('beam.directives')
         this.channel = $scope.channel;
 
         $scope.$on('$destroy', function() {
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('names' + this.channel), this.onChannelNames);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('join' + this.channel), this.onChannelJoin);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('part' + this.channel), this.onChannelPart);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('kick' + this.channel), this.onChannelKick);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener('+mode', this.onAddMode);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener('-mode', this.onTakeMode);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener('quit', this.onQuit);
+          this.connection.removeListener(('names' + this.channel), this.onChannelNames);
+          this.connection.removeListener(('join' + this.channel), this.onChannelJoin);
+          this.connection.removeListener(('part' + this.channel), this.onChannelPart);
+          this.connection.removeListener(('kick' + this.channel), this.onChannelKick);
+          this.connection.removeListener('+mode', this.onAddMode);
+          this.connection.removeListener('-mode', this.onTakeMode);
+          this.connection.removeListener('quit', this.onQuit);
         }.bind(this));
 
         // HACK: This ain't right...
-        $scope.$parent.$parent.clientCtrl.connection.on(('names' + this.channel), this.onChannelNames);
-        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), this.onChannelJoin);
-        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), this.onChannelPart);
-        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), this.onChannelKick);
-        $scope.$parent.$parent.clientCtrl.connection.on('+mode', this.onAddMode);
-        $scope.$parent.$parent.clientCtrl.connection.on('-mode', this.onTakeMode);
-        $scope.$parent.$parent.clientCtrl.connection.on('quit', this.onQuit);
+        this.connection.on(('names' + this.channel), this.onChannelNames);
+        this.connection.on(('join' + this.channel), this.onChannelJoin);
+        this.connection.on(('part' + this.channel), this.onChannelPart);
+        this.connection.on(('kick' + this.channel), this.onChannelKick);
+        this.connection.on('+mode', this.onAddMode);
+        this.connection.on('-mode', this.onTakeMode);
+        this.connection.on('quit', this.onQuit);
       },
 
       controllerAs: 'userListCtrl',

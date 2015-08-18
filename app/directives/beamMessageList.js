@@ -5,14 +5,16 @@ angular.module('beam.directives')
       templateUrl: '../templates/beamMessageList.html',
       scope: {
         channel: '@',
+        host: '@',
       },
-      controller: function($rootScope, $scope) {
+      controller: function($rootScope, $scope, ircService) {
         var md5 = require('md5');
         this.genIdenticon = function(nick) {
           return new Identicon(md5(nick), 100);
         };
 
-        // Todo: remove listeners
+        this.host = $scope.host;
+        this.connection = ircService.get(this.host);
 
         this.onChannelMessage = function(nick, text, message) {
           var identicon = this.genIdenticon(nick).toString();
@@ -27,7 +29,7 @@ angular.module('beam.directives')
         }.bind(this);
 
         this.onChannelSelfMessage = function(event, data) {
-          var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
+          var nick = this.connection.nick;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -67,7 +69,7 @@ angular.module('beam.directives')
         }.bind(this);
 
         this.onChannelSelfAction = function(event, data) {
-          var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
+          var nick = this.connection.nick;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -132,11 +134,11 @@ angular.module('beam.directives')
             f();
           });
 
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('message' + this.channel), this.onChannelMessage);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener('action', this.onAction);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('join' + this.channel), this.onChannelJoin);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('part' + this.channel), this.onChannelPart);
-          $scope.$parent.$parent.clientCtrl.connection.removeListener(('kick' + this.channel), this.onChannelKick);
+          this.connection.removeListener(('message' + this.channel), this.onChannelMessage);
+          this.connection.removeListener('action', this.onAction);
+          this.connection.removeListener(('join' + this.channel), this.onChannelJoin);
+          this.connection.removeListener(('part' + this.channel), this.onChannelPart);
+          this.connection.removeListener(('kick' + this.channel), this.onChannelKick);
         }.bind(this));
 
         this.channel = $scope.channel;
@@ -144,11 +146,11 @@ angular.module('beam.directives')
 
         this.cleanFunctions = [];
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('message' + this.channel), this.onChannelMessage);
-        $scope.$parent.$parent.clientCtrl.connection.on('action', this.onAction);
-        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), this.onChannelJoin);
-        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), this.onChannelPart);
-        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), this.onChannelKick);
+        this.connection.on(('message' + this.channel), this.onChannelMessage);
+        this.connection.on('action', this.onAction);
+        this.connection.on(('join' + this.channel), this.onChannelJoin);
+        this.connection.on(('part' + this.channel), this.onChannelPart);
+        this.connection.on(('kick' + this.channel), this.onChannelKick);
 
         this.cleanFunctions.push($rootScope.$on(('selfMessage|' + this.channel), this.onChannelSelfMessage));
 

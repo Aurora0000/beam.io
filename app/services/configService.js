@@ -8,6 +8,7 @@ angular.module('beam.services')
       if (this.doc === null) {
         this.doc = yaml.safeLoad(fs.readFileSync(homedir() + '/settings.yaml', 'utf8'));
       }
+
       return this.doc[name];
-    }
+    };
   });

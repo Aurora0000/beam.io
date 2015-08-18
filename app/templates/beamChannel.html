@@ -8,10 +8,10 @@
 </div>
 <div class="ui grid">
   <div class="eleven wide column">
-    <beam-message-list channel="{{channelCtrl.channel}}"></beam-message-list>
+    <beam-message-list host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-message-list>
   </div>
   <div class="five wide column">
-    <beam-user-list channel="{{channelCtrl.channel}}"></beam-user-list>
+    <beam-user-list host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-user-list>
   </div>
 </div>
-<beam-message-box channel="{{channelCtrl.channel}}"></beam-message-box>
+<beam-message-box host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-message-box>

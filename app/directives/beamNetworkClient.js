@@ -8,31 +8,22 @@ angular.module('beam.directives')
       scope: {
         settings: '@',
       },
-      controller: function($compile, $scope, $rootScope, configService) {
+      controller: function($compile, $scope, $rootScope, ircService, configService) {
         this.channels = [];
         this.currentChannel = '';
+        this.host = configService.get('host');
 
         this.connect = function(settings) {
-          this.settings = {
-            userName: (settings.user || 'beam'),
-            realName: (settings.real || 'beam.io IRC (https://github.com/Aurora0000/beam.io)'),
-            port: (settings.port || 6667),
-            autoRejoin: (settings.autoRejoin || true),
-            secure: (settings.tls || false),
-            certExpired: (settings.ignoreSecure || false),
-            selfSigned: (settings.ignoreSecure || false),
-            channels: (settings.channels || []),
-            host: settings.host,
-          };
-          return new irc.Client(settings.host, settings.nick, this.settings);
+          ircService.connect(settings);
         };
 
-        this.connection = this.connect({
-          host: configService.get('host'),
+        this.connect({
+          host: this.host,
           port: configService.get('port'),
           nick: configService.get('nick'),
           channels: configService.get('channels'),
         });
+        this.connection = ircService.get(this.host);
 
         this.connection.on('error', function(message) {
           console.log('Error in IRC library: ', message);

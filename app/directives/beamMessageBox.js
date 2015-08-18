@@ -5,9 +5,13 @@ angular.module('beam.directives')
       templateUrl: '../templates/beamMessageBox.html',
       scope: {
         channel: '@',
+        host: '@',
       },
-      controller: function($rootScope, $scope) {
+      controller: function($rootScope, $scope, ircService) {
         this.channel = $scope.channel;
+        this.host = $scope.host;
+        this.connection = ircService.get(this.host);
+
         this.send = function() {
           if ($scope.message.startsWith('//')) {
             $scope.message = $scope.message.substr(1);
@@ -22,12 +26,12 @@ angular.module('beam.directives')
                 break;
               case '/me':
                 var message = bits.slice(1).join(' ');
-                $scope.$parent.$parent.clientCtrl.connection.action(this.channel, message);
+                this.connection.action(this.channel, message);
                 $rootScope.$broadcast(('selfAction|' + this.channel), message);
                 break;
               default:
                 bits[0] = bits[0].substr(1);
-                $scope.$parent.$parent.clientCtrl.connection.send.apply($scope.$parent.$parent.clientCtrl.connection, bits);
+                this.connection.send.apply(this.connection, bits);
                 break;
             }
           } else {
@@ -38,7 +42,7 @@ angular.module('beam.directives')
         };
 
         this._send = function(recipient, message) {
-          $scope.$parent.$parent.clientCtrl.connection.say(recipient, message);
+          this.connection.say(recipient, message);
           $rootScope.$broadcast('selfMessage', [recipient, message]);
 
           // The selfMessage|channel is dealt with by beam-network-client.

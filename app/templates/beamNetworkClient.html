@@ -1,42 +1,29 @@
-<div class="ui left vertical inverted sidebar labeled icon menu">
-  <a class="item">
-    <i class="comments icon"></i> #int0x10
-    <small>on int0x10Net</small>
-  </a>
-  <a class="item">
-    <i class="settings icon"></i> Settings
-  </a>
+<div class="ui active dimmer" ng-if="clientCtrl.channels.length === 0">
+  <div class="ui text indeterminate loader">Connecting to {{::clientCtrl.settings.host}}</div>
 </div>
-
-<div class="pusher">
-  <div class="ui active dimmer" ng-if="clientCtrl.channels.length === 0">
-    <div class="ui text indeterminate loader">Connecting to {{::clientCtrl.settings.host}}</div>
-  </div>
-  <div class="ui grid">
-    <div class="two wide column">
-      <div class="ui alternating relaxed list scrollable">
-        <div class="item" ng-repeat="channel in clientCtrl.channels" ng-click="clientCtrl.setActiveChannel(channel)">
-          <div class="content">
-            <span class="header">
-              {{::channel}} <i class="minus icon" ng-click="clientCtrl.partChannel(channel)"></i>
-            </span>
-          </div>
+<div class="ui grid">
+  <div class="two wide column">
+    <div class="ui alternating relaxed list scrollable">
+      <div class="item" ng-repeat="channel in clientCtrl.channels" ng-click="clientCtrl.setActiveChannel(channel)">
+        <div class="content">
+          <span class="header">
+            {{::channel}} <i class="minus icon" ng-click="clientCtrl.partChannel(channel)"></i>
+          </span>
         </div>
-        <div class="item" ng-click="clientCtrl.showModal()">
-          <div class="content">
-            <span class="header">
-              <i class="add square icon"></i> Join Channel
-            </span>
-          </div>
+      </div>
+      <div class="item" ng-click="clientCtrl.showModal()">
+        <div class="content">
+          <span class="header">
+            <i class="add square icon"></i> Join Channel
+          </span>
         </div>
       </div>
     </div>
-    <div class="fourteen wide column">
-      <beam-channel channel="{{channel}}" ng-repeat="channel in clientCtrl.channels" ng-show="clientCtrl.currentChannel == '{{channel}}'"></beam-channel>
-    </div>
+  </div>
+  <div class="fourteen wide column">
+    <beam-channel channel="{{channel}}" host="{{clientCtrl.host}}" ng-repeat="channel in clientCtrl.channels" ng-show="clientCtrl.currentChannel == '{{channel}}'"></beam-channel>
   </div>
 </div>
-
 <div class="ui modal">
   <div class="content">
     <span class="header">
