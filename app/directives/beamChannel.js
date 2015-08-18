@@ -14,9 +14,11 @@ angular.module('beam.directives')
             this.topic = topic;
             $scope.$apply();
           }
-        };
-        $scope.$parent.clientCtrl.connection.on('topic', this.setTopic.bind(this));
-
+        }.bind(this);
+        $scope.$parent.clientCtrl.connection.on('topic', this.setTopic);
+        $scope.$on('$destroy', function() {
+          $scope.$parent.clientCtrl.connection.removeListener('topic', this.setTopic);
+        }.bind(this));
       },
       controllerAs: 'channelCtrl'
     };
