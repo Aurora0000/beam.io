@@ -6,7 +6,7 @@ angular.module('beam.directives')
       restrict: 'E',
       templateUrl: '../templates/beamNetworkClient.html',
       scope: {
-        settings: '@'
+        settings: '@',
       },
       controller: function($compile, $scope, $rootScope, configService) {
         this.channels = [];
@@ -22,7 +22,7 @@ angular.module('beam.directives')
             certExpired: (settings.ignoreSecure || false),
             selfSigned: (settings.ignoreSecure || false),
             channels: (settings.channels || []),
-            host: settings.host
+            host: settings.host,
           };
           return new irc.Client(settings.host, settings.nick, this.settings);
         };
@@ -31,11 +31,11 @@ angular.module('beam.directives')
           host: configService.get('host'),
           port: configService.get('port'),
           nick: configService.get('nick'),
-          channels: configService.get('channels')
+          channels: configService.get('channels'),
         });
 
         this.connection.on('error', function(message) {
-          console.log("Error in IRC library: ", message);
+          console.log('Error in IRC library: ', message);
         }.bind(this));
 
         this.connection.on('join', function(channel, nick) {
@@ -73,7 +73,7 @@ angular.module('beam.directives')
           if (this.channels.indexOf(channel) === -1) {
             this.channels.push(channel);
           }
-        }
+        };
 
         this.setActiveChannel = function(channel) {
           this.currentChannel = channel;
@@ -96,12 +96,14 @@ angular.module('beam.directives')
 
         this.removeTab = function(channel) {
           var chan = this.channels.indexOf(channel);
+
           // Channel may have alredy been removed on part. check.
           if (chan !== -1) {
             this.channels.splice(chan, 1);
           }
         };
       },
-      controllerAs: 'clientCtrl'
+
+      controllerAs: 'clientCtrl',
     };
   });

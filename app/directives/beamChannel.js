@@ -5,7 +5,6 @@ angular.module('beam.directives')
       templateUrl: '../templates/beamChannel.html',
       scope: {
         channel: '@',
-        connection: '@'
       },
       controller: function($scope) {
         this.channel = $scope.channel;
@@ -20,6 +19,7 @@ angular.module('beam.directives')
           $scope.$parent.clientCtrl.connection.removeListener('topic', this.setTopic);
         }.bind(this));
       },
-      controllerAs: 'channelCtrl'
+
+      controllerAs: 'channelCtrl',
     };
   });

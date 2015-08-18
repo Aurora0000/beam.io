@@ -4,7 +4,7 @@ angular.module('beam.directives')
       restrict: 'E',
       templateUrl: '../templates/beamMessageList.html',
       scope: {
-        channel: '@'
+        channel: '@',
       },
       controller: function($rootScope, $scope) {
         var md5 = require('md5');
@@ -21,7 +21,7 @@ angular.module('beam.directives')
             message: text,
             time: new Date(),
             identicon: identicon,
-            type: 'message'
+            type: 'message',
           });
           $scope.$apply();
         }.bind(this);
@@ -34,7 +34,7 @@ angular.module('beam.directives')
             message: data,
             time: new Date(),
             identicon: identicon,
-            type: 'message'
+            type: 'message',
           });
         }.bind(this);
 
@@ -46,7 +46,7 @@ angular.module('beam.directives')
             message: data,
             time: new Date(),
             identicon: identicon,
-            type: 'message'
+            type: 'message',
           });
         }.bind(this);
 
@@ -54,13 +54,14 @@ angular.module('beam.directives')
           if (to !== this.channel) {
             return;
           }
+
           var identicon = this.genIdenticon(from).toString();
           this.messages.push({
             nick: from,
             message: text,
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
           $scope.$apply();
         }.bind(this);
@@ -73,7 +74,7 @@ angular.module('beam.directives')
             message: data,
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
         }.bind(this);
 
@@ -84,7 +85,7 @@ angular.module('beam.directives')
             message: 'has joined ' + this.channel,
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
           $scope.$apply();
         }.bind(this);
@@ -96,7 +97,7 @@ angular.module('beam.directives')
             message: 'has left ' + this.channel,
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
           $scope.$apply();
         }.bind(this);
@@ -108,7 +109,7 @@ angular.module('beam.directives')
             message: 'has been kicked from ' + this.channel + ' by ' + by + ' (' + reason + ')',
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
           $scope.$apply();
         }.bind(this);
@@ -121,22 +122,23 @@ angular.module('beam.directives')
             message: 'has quit (' + data[1] + ')',
             time: new Date(),
             identicon: identicon,
-            type: 'action'
+            type: 'action',
           });
           $scope.$apply();
         }.bind(this);
-
 
         $scope.$on('$destroy', function() {
           this.cleanFunctions.forEach(function(f) {
             f();
           });
+
           $scope.$parent.$parent.clientCtrl.connection.removeListener(('message' + this.channel), this.onChannelMessage);
           $scope.$parent.$parent.clientCtrl.connection.removeListener('action', this.onAction);
           $scope.$parent.$parent.clientCtrl.connection.removeListener(('join' + this.channel), this.onChannelJoin);
           $scope.$parent.$parent.clientCtrl.connection.removeListener(('part' + this.channel), this.onChannelPart);
           $scope.$parent.$parent.clientCtrl.connection.removeListener(('kick' + this.channel), this.onChannelKick);
         }.bind(this));
+
         this.channel = $scope.channel;
         this.messages = [];
 
@@ -149,11 +151,13 @@ angular.module('beam.directives')
         $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), this.onChannelKick);
 
         this.cleanFunctions.push($rootScope.$on(('selfMessage|' + this.channel), this.onChannelSelfMessage));
+
         // Private messages are sent via $rootScope
         this.cleanFunctions.push($rootScope.$on(('message|' + this.channel), this.onChannelPrivMessage));
         this.cleanFunctions.push($rootScope.$on(('selfAction|' + this.channel), this.onChannelSelfAction));
         this.cleanFunctions.push($rootScope.$on(('quit|' + this.channel), this.onChannelQuit));
       },
-      controllerAs: 'messageListCtrl'
+
+      controllerAs: 'messageListCtrl',
     };
   });

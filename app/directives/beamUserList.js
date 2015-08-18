@@ -5,7 +5,7 @@ angular.module('beam.directives')
       templateUrl: '../templates/beamUserList.html',
       scope: {
         connection: '@',
-        channel: '@'
+        channel: '@',
       },
       controller: function($scope, $rootScope) {
         var md5 = require('md5');
@@ -24,10 +24,11 @@ angular.module('beam.directives')
               userList.push({
                 name: key,
                 mode: value,
-                identicon: identicon
+                identicon: identicon,
               });
             }
           }
+
           // TODO: Sort
           this.users = userList;
           $scope.$apply();
@@ -39,7 +40,7 @@ angular.module('beam.directives')
             this.users.push({
               name: nick,
               mode: '',
-              identicon: identicon
+              identicon: identicon,
             });
             $scope.$apply();
           }
@@ -49,6 +50,7 @@ angular.module('beam.directives')
           this.users = this.users.filter(function(item) {
             return item.name !== nick;
           });
+
           $scope.$apply();
         }.bind(this);
 
@@ -56,6 +58,7 @@ angular.module('beam.directives')
           this.users = this.users.filter(function(item) {
             return item.name !== nick;
           });
+
           $scope.$apply();
         }.bind(this);
 
@@ -63,6 +66,7 @@ angular.module('beam.directives')
           if (channel !== this.channel) {
             return;
           }
+
           if (mode === 'o') {
             // Someone has been oped. Search through and update
             for (var i = 0; i < this.users.length; i++) {
@@ -80,6 +84,7 @@ angular.module('beam.directives')
               }
             }
           }
+
           $scope.$apply();
         }.bind(this);
 
@@ -88,6 +93,7 @@ angular.module('beam.directives')
           if (channel !== this.channel) {
             return;
           }
+
           if (mode === 'o' || mode === 'v') {
             for (var i = 0; i < this.users.length; i++) {
               if (this.users[i].name === argument) {
@@ -96,6 +102,7 @@ angular.module('beam.directives')
               }
             }
           }
+
           $scope.$apply();
         }.bind(this);
 
@@ -107,6 +114,7 @@ angular.module('beam.directives')
             this.users = this.users.filter(function(item) {
               return item.name !== nick;
             });
+
             // HACK: Tell message list that user has quit.
             $rootScope.$broadcast(('quit|' + this.channel), [nick, reason]);
           }
@@ -133,6 +141,7 @@ angular.module('beam.directives')
         $scope.$parent.$parent.clientCtrl.connection.on('-mode', this.onTakeMode);
         $scope.$parent.$parent.clientCtrl.connection.on('quit', this.onQuit);
       },
-      controllerAs: 'userListCtrl'
+
+      controllerAs: 'userListCtrl',
     };
   });

@@ -4,19 +4,9 @@ angular.module('beam.directives')
       restrict: 'E',
       templateUrl: '../templates/beamMessageBox.html',
       scope: {
-        channel: '@'
+        channel: '@',
       },
       controller: function($rootScope, $scope) {
-
-        // startswith polyfill from MDN
-        /*if (!String.prototype.startsWith) {
-          String.prototype.startsWith = function(searchString, position) {
-            position = position || 0;
-            return this.indexOf(searchString, position) === position;
-          };
-        }*/
-
-
         this.channel = $scope.channel;
         this.send = function() {
           if ($scope.message.startsWith('//')) {
@@ -43,15 +33,18 @@ angular.module('beam.directives')
           } else {
             this._send(this.channel, $scope.message);
           }
+
           $scope.message = '';
         };
 
         this._send = function(recipient, message) {
           $scope.$parent.$parent.clientCtrl.connection.say(recipient, message);
           $rootScope.$broadcast('selfMessage', [recipient, message]);
+
           // The selfMessage|channel is dealt with by beam-network-client.
         };
       },
-      controllerAs: 'messageBoxCtrl'
+
+      controllerAs: 'messageBoxCtrl',
     };
   });
