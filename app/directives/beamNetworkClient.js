@@ -56,13 +56,24 @@ angular.module('beam.directives')
         this.connection.on('message', function(nick, to, text) {
           if (to === this.connection.nick) {
             // Private message, pass on to PM tab (if created)
-            if (this.channels.indexOf(nick) === -1) {
-              this.channels.push(nick);
-              $scope.$apply();
-            }
+            this.addChannel(nick);
+            $scope.$apply();
+
             $rootScope.$broadcast(('message|' + nick), text);
           }
         }.bind(this));
+
+        // Called on /msg
+        $rootScope.$on('selfMessage', function(event, data) {
+          this.addChannel(data[0]);
+          $rootScope.$broadcast(('selfMessage|' + data[0]), data[1]);
+        }.bind(this));
+
+        this.addChannel = function(channel) {
+          if (this.channels.indexOf(channel) === -1) {
+            this.channels.push(channel);
+          }
+        }
 
         this.setActiveChannel = function(channel) {
           this.currentChannel = channel;

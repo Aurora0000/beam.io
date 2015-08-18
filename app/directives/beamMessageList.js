@@ -12,9 +12,9 @@ angular.module('beam.directives')
           return new Identicon(md5(nick), 100);
         };
 
-        this.channel = $scope.channel;
-        this.messages = [];
-        $scope.$parent.$parent.clientCtrl.connection.on(('message' + this.channel), function(nick, text, message) {
+        // Todo: remove listeners
+
+        this.onChannelMessage = function(nick, text, message) {
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -24,10 +24,9 @@ angular.module('beam.directives')
             type: 'message'
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-
-        $rootScope.$on(('selfMessage|' + this.channel), function(event, data) {
+        this.onChannelSelfMessage = function(event, data) {
           var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
@@ -37,10 +36,9 @@ angular.module('beam.directives')
             identicon: identicon,
             type: 'message'
           });
-        }.bind(this));
+        }.bind(this);
 
-        // Private messages are sent via $rootScope
-        $rootScope.$on(('message|' + this.channel), function(event, data) {
+        this.onChannelPrivMessage = function(event, data) {
           var nick = this.channel;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
@@ -50,9 +48,9 @@ angular.module('beam.directives')
             identicon: identicon,
             type: 'message'
           });
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on('action', function(from, to, text) {
+        this.onAction = function(from, to, text) {
           if (to !== this.channel) {
             return;
           }
@@ -65,9 +63,9 @@ angular.module('beam.directives')
             type: 'action'
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $rootScope.$on(('selfAction|' + this.channel), function(event, data) {
+        this.onChannelSelfAction = function(event, data) {
           var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
@@ -77,9 +75,9 @@ angular.module('beam.directives')
             identicon: identicon,
             type: 'action'
           });
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), function(nick) {
+        this.onChannelJoin = function(nick) {
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -89,9 +87,9 @@ angular.module('beam.directives')
             type: 'action'
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), function(nick) {
+        this.onChannelPart = function(nick) {
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -101,9 +99,9 @@ angular.module('beam.directives')
             type: 'action'
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), function(nick, by, reason) {
+        this.onChannelKick = function(nick, by, reason) {
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -113,9 +111,9 @@ angular.module('beam.directives')
             type: 'action'
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $rootScope.$on(('quit|' + this.channel), function(event, data) {
+        this.onChannelQuit = function(event, data) {
           var nick = data[0];
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
@@ -126,7 +124,35 @@ angular.module('beam.directives')
             type: 'action'
           });
           $scope.$apply();
+        }.bind(this);
+
+
+        $scope.$on('$destroy', function() {
+          this.cleanFunctions.forEach(function(f) {
+            f();
+          });
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('message' + this.channel), this.onChannelMessage);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener('action', this.onAction);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('join' + this.channel), this.onChannelJoin);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('part' + this.channel), this.onChannelPart);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('kick' + this.channel), this.onChannelKick);
         }.bind(this));
+        this.channel = $scope.channel;
+        this.messages = [];
+
+        this.cleanFunctions = [];
+
+        $scope.$parent.$parent.clientCtrl.connection.on(('message' + this.channel), this.onChannelMessage);
+        $scope.$parent.$parent.clientCtrl.connection.on('action', this.onAction);
+        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), this.onChannelJoin);
+        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), this.onChannelPart);
+        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), this.onChannelKick);
+
+        this.cleanFunctions.push($rootScope.$on(('selfMessage|' + this.channel), this.onChannelSelfMessage));
+        // Private messages are sent via $rootScope
+        this.cleanFunctions.push($rootScope.$on(('message|' + this.channel), this.onChannelPrivMessage));
+        this.cleanFunctions.push($rootScope.$on(('selfAction|' + this.channel), this.onChannelSelfAction));
+        this.cleanFunctions.push($rootScope.$on(('quit|' + this.channel), this.onChannelQuit));
       },
       controllerAs: 'messageListCtrl'
     };

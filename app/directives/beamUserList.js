@@ -13,9 +13,7 @@ angular.module('beam.directives')
           return new Identicon(md5(nick), 100);
         };
 
-        this.channel = $scope.channel;
-        // HACK: This ain't right...
-        $scope.$parent.$parent.clientCtrl.connection.on(('names' + this.channel), function(nicks) {
+        this.onChannelNames = function(nicks) {
           // We're given the nicks in a useless way (nick is key, mode is value)
           // but we want to sort, so we map it into an array.
           var userList = [];
@@ -33,9 +31,9 @@ angular.module('beam.directives')
           // TODO: Sort
           this.users = userList;
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), function(nick) {
+        this.onChannelJoin = function(nick) {
           if (this.users != null) {
             var identicon = this.genIdenticon(nick).toString();
             this.users.push({
@@ -45,23 +43,23 @@ angular.module('beam.directives')
             });
             $scope.$apply();
           }
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), function(nick) {
+        this.onChannelPart = function(nick) {
           this.users = this.users.filter(function(item) {
             return item.name !== nick;
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), function(nick) {
+        this.onChannelKick = function(nick) {
           this.users = this.users.filter(function(item) {
             return item.name !== nick;
           });
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on('+mode', function(channel, by, mode, argument) {
+        this.onAddMode = function(channel, by, mode, argument) {
           if (channel !== this.channel) {
             return;
           }
@@ -83,9 +81,9 @@ angular.module('beam.directives')
             }
           }
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on('-mode', function(channel, by, mode, argument) {
+        this.onTakeMode = function(channel, by, mode, argument) {
           // TODO: edge cases where user has + and @
           if (channel !== this.channel) {
             return;
@@ -99,9 +97,9 @@ angular.module('beam.directives')
             }
           }
           $scope.$apply();
-        }.bind(this));
+        }.bind(this);
 
-        $scope.$parent.$parent.clientCtrl.connection.on('quit', function(nick, reason, channels) {
+        this.onQuit = function(nick, reason, channels) {
           var len = this.users.filter(function(item) {
             return item.name === nick;
           }).length;
@@ -112,7 +110,28 @@ angular.module('beam.directives')
             // HACK: Tell message list that user has quit.
             $rootScope.$broadcast(('quit|' + this.channel), [nick, reason]);
           }
+        }.bind(this);
+
+        this.channel = $scope.channel;
+
+        $scope.$on('$destroy', function() {
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('names' + this.channel), this.onChannelNames);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('join' + this.channel), this.onChannelJoin);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('part' + this.channel), this.onChannelPart);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener(('kick' + this.channel), this.onChannelKick);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener('+mode', this.onAddMode);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener('-mode', this.onTakeMode);
+          $scope.$parent.$parent.clientCtrl.connection.removeListener('quit', this.onQuit);
         }.bind(this));
+
+        // HACK: This ain't right...
+        $scope.$parent.$parent.clientCtrl.connection.on(('names' + this.channel), this.onChannelNames);
+        $scope.$parent.$parent.clientCtrl.connection.on(('join' + this.channel), this.onChannelJoin);
+        $scope.$parent.$parent.clientCtrl.connection.on(('part' + this.channel), this.onChannelPart);
+        $scope.$parent.$parent.clientCtrl.connection.on(('kick' + this.channel), this.onChannelKick);
+        $scope.$parent.$parent.clientCtrl.connection.on('+mode', this.onAddMode);
+        $scope.$parent.$parent.clientCtrl.connection.on('-mode', this.onTakeMode);
+        $scope.$parent.$parent.clientCtrl.connection.on('quit', this.onQuit);
       },
       controllerAs: 'userListCtrl'
     };

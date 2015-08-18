@@ -33,7 +33,7 @@ angular.module('beam.directives')
               case '/me':
                 var message = bits.slice(1).join(' ');
                 $scope.$parent.$parent.clientCtrl.connection.action(this.channel, message);
-                $rootScope.$broadcast(('selfAction|' + this.channel), message)
+                $rootScope.$broadcast(('selfAction|' + this.channel), message);
                 break;
               default:
                 bits[0] = bits[0].substr(1);
@@ -48,7 +48,8 @@ angular.module('beam.directives')
 
         this._send = function(recipient, message) {
           $scope.$parent.$parent.clientCtrl.connection.say(recipient, message);
-          $rootScope.$broadcast(('selfMessage|' + recipient), message);
+          $rootScope.$broadcast('selfMessage', [recipient, message]);
+          // The selfMessage|channel is dealt with by beam-network-client.
         };
       },
       controllerAs: 'messageBoxCtrl'
