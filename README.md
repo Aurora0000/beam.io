@@ -62,26 +62,32 @@ CoffeeScript, no TypeScript, no ES6!).
 ## Licenses
 ### AngularJS
 > Copyright (C) 2010-2015 Google, Inc. http://angularjs.org
+>
 > License: MIT
 
 ### angular-moment
 > Copyright (C) 2013-2015 Uri Shaked and contributors
+>
 > License: MIT
 
 ### identicon.js
 > Copyright (C) 2013 Stewart Lord
+>
 > License: BSD
 
 ### jQuery
 > Copyright (C) 2005-2015 jQuery Foundation, Inc.
+>
 > License: MIT
 
 ### PNGLib
 > Copyright (C) 2010 Robert Eisele
+>
 > License: BSD
 
 ### angular-scroll-glue
 > Copyright (C) 2013 Luegg
+>
 > License: MIT
 
 ### node_modules
