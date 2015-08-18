@@ -1,11 +1,15 @@
 # beam.io
+[![Download](https://img.shields.io/badge/release-v0.1.0--alpha1-blue.svg)](https://github.com/Aurora0000/beam.io/releases/latest)
 [![Dependency Status](https://david-dm.org/Aurora0000/beam.io.svg)](https://david-dm.org/Aurora0000/beam.io)
 [![devDependency Status](https://david-dm.org/Aurora0000/beam.io/dev-status.svg)](https://david-dm.org/Aurora0000/beam.io#info=devDependencies)
+
+Looking for [releases](https://github.com/Aurora0000/beam.io/releases)? Available for Windows, Linux and Mac OS X.
 
 Beam.io is an IRC client powered by 
 [GitHub Electron](https://github.com/atom/electron), 
 [Node.js](https://nodejs.org) and open web technologies such as HTML5, CSS3 
 and JavaScript (ES5 and AngularJS).
+
 
 ## Why choose to use beam.io?
 Since its creation in 1988 (27 years ago!), IRC has been one of the greatest 
