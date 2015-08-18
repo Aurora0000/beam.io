@@ -26,8 +26,22 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this));
 
+
         $rootScope.$on(('selfMessage|' + this.channel), function(event, data) {
           var nick = $scope.$parent.$parent.clientCtrl.connection.nick;
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: data,
+            time: new Date(),
+            identicon: identicon,
+            type: 'message'
+          });
+        }.bind(this));
+
+        // Private messages are sent via $rootScope
+        $rootScope.$on(('message|' + this.channel), function(event, data) {
+          var nick = this.channel;
           var identicon = this.genIdenticon(nick).toString();
           this.messages.push({
             nick: nick,
@@ -101,18 +115,17 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this));
 
-        $scope.$parent.$parent.clientCtrl.connection.on('quit', function(nick, reason, channels) {
-          if (channels.indexOf(this.channel) !== -1) {
-            var identicon = this.genIdenticon(nick).toString();
-            this.messages.push({
-              nick: nick,
-              message: 'has quit (' + reason + ')',
-              time: new Date(),
-              identicon: identicon,
-              type: 'action'
-            });
-            $scope.$apply();
-          }
+        $rootScope.$on(('quit|' + this.channel), function(event, data) {
+          var nick = data[0];
+          var identicon = this.genIdenticon(nick).toString();
+          this.messages.push({
+            nick: nick,
+            message: 'has quit (' + data[1] + ')',
+            time: new Date(),
+            identicon: identicon,
+            type: 'action'
+          });
+          $scope.$apply();
         }.bind(this));
       },
       controllerAs: 'messageListCtrl'

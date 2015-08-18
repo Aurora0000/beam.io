@@ -7,7 +7,7 @@ angular.module('beam.directives')
         connection: '@',
         channel: '@'
       },
-      controller: function($scope) {
+      controller: function($scope, $rootScope) {
         var md5 = require('md5');
         this.genIdenticon = function(nick) {
           return new Identicon(md5(nick), 100);
@@ -73,8 +73,7 @@ angular.module('beam.directives')
                 return;
               }
             }
-          }
-          else if (mode === 'v') {
+          } else if (mode === 'v') {
             // Someone has been voiced.
             for (var i = 0; i < this.users.length; i++) {
               if (this.users[i].name === argument) {
@@ -103,11 +102,15 @@ angular.module('beam.directives')
         }.bind(this));
 
         $scope.$parent.$parent.clientCtrl.connection.on('quit', function(nick, reason, channels) {
-          if (channels.indexOf(this.channel) !== -1) {
+          var len = this.users.filter(function(item) {
+            return item.name === nick;
+          }).length;
+          if (len !== 0) {
             this.users = this.users.filter(function(item) {
               return item.name !== nick;
             });
-            $scope.$apply();
+            // HACK: Tell message list that user has quit.
+            $rootScope.$broadcast(('quit|' + this.channel), [nick, reason]);
           }
         }.bind(this));
       },

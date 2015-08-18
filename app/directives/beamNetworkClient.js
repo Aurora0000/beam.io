@@ -8,7 +8,7 @@ angular.module('beam.directives')
       scope: {
         settings: '@'
       },
-      controller: function($compile, $scope, configService) {
+      controller: function($compile, $scope, $rootScope, configService) {
         this.channels = [];
         this.currentChannel = '';
 
@@ -48,8 +48,19 @@ angular.module('beam.directives')
 
         this.connection.on('part', function(channel, nick) {
           if (nick === this.connection.nick) {
-            this.channels.splice(this.channels.indexOf(channel), 1);
+            this.removeTab(channel);
             $scope.$apply();
+          }
+        }.bind(this));
+
+        this.connection.on('message', function(nick, to, text) {
+          if (to === this.connection.nick) {
+            // Private message, pass on to PM tab (if created)
+            if (this.channels.indexOf(nick) === -1) {
+              this.channels.push(nick);
+              $scope.$apply();
+            }
+            $rootScope.$broadcast(('message|' + nick), text);
           }
         }.bind(this));
 
@@ -65,11 +76,16 @@ angular.module('beam.directives')
 
         this.partChannel = function(channel) {
           this.connection.part(channel);
+          this.removeTab(channel);
         }.bind(this);
 
         this.showModal = function() {
           $('.ui.modal').modal('show');
-        }
+        }.bind(this);
+
+        this.removeTab = function(channel) {
+          this.channels.splice(this.channels.indexOf(channel), 1);
+        };
       },
       controllerAs: 'clientCtrl'
     };
