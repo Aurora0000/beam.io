@@ -36,7 +36,7 @@ creation of beam.io, which we hope has all of these features, and more.
 - Theming system
 - Connection to multiple networks
 
-## :construction:For Developers:construction:
+## :construction: For Developers :construction:
 ### :wrench: Building beam.io
 
 ```bash
