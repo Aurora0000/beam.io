@@ -58,7 +58,7 @@ gulp package-platform-arch
 Releases are dropped into releases/beam-platform-arch.zip. **Do not commit 
 release zips**!
 
-### Collaborating
+### :octocat: Collaborating
 Pull requests are welcome. All code must be in ES5 (that means no 
 CoffeeScript, no TypeScript, no ES6!).
 
