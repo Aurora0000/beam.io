@@ -36,6 +36,14 @@ creation of beam.io, which we hope has all of these features, and more.
 - Theming system
 - Connection to multiple networks
 
+## :bug: Known Bugs
+#### beam.io will not work if the path to it contains accents or other non-ASCII characters
+**Workaround**: Move beam.io to a path without accents.
+
+#### All Bugs
+Please see [this list](https://github.com/Aurora0000/beam.io/labels/bug) for all known bugs.
+
+
 ## :construction: For Developers :construction:
 ### :wrench: Building beam.io
 
