@@ -17,11 +17,21 @@ angular.module('beam.directives')
           ircService.connect(settings);
         };
 
+        if (!configService.canLoad()) {
+          // Signal main process to open welcome dialog because settings aren't
+          // available.
+        }
+
         this.connect({
           host: this.host,
           port: configService.get('port'),
           nick: configService.get('nick'),
+          userName: configService.get('userName'),
+          realName: configService.get('realName'),
           channels: configService.get('channels'),
+          autoRejoin: configService.get('autoRejoin'),
+          tls: configService.get('tls'),
+          ignoreSecure: configService.get('ignoreSecure'),
         });
         this.connection = ircService.get(this.host);
 
@@ -49,7 +59,6 @@ angular.module('beam.directives')
             // Private message, pass on to PM tab (if created)
             this.addChannel(nick);
             $scope.$apply();
-
             $rootScope.$broadcast(('message|' + nick), text);
           }
         }.bind(this));

@@ -123,6 +123,25 @@ angular.module('beam.directives')
           }
         }.bind(this);
 
+        this.onNick = function(old, _new) {
+          var len = this.users.filter(function(item) {
+            return item.name === old;
+          }).length;
+
+          if (len !== 0) {
+            this.users = this.users.map(function(item) {
+              if (item.name === old) {
+                item.name = _new;
+              }
+
+              return item;
+            });
+
+            // HACK: Tell message list that user has changed nick.
+            $rootScope.$broadcast(('nick|' + this.channel), [old, _new]);
+          }
+        }.bind(this);
+
         this.channel = $scope.channel;
 
         $scope.$on('$destroy', function() {
@@ -133,9 +152,9 @@ angular.module('beam.directives')
           this.connection.removeListener('+mode', this.onAddMode);
           this.connection.removeListener('-mode', this.onTakeMode);
           this.connection.removeListener('quit', this.onQuit);
+          this.connection.removeListener('nick', this.onNick);
         }.bind(this));
 
-        // HACK: This ain't right...
         this.connection.on(('names' + this.channel), this.onChannelNames);
         this.connection.on(('join' + this.channel), this.onChannelJoin);
         this.connection.on(('part' + this.channel), this.onChannelPart);
@@ -143,6 +162,7 @@ angular.module('beam.directives')
         this.connection.on('+mode', this.onAddMode);
         this.connection.on('-mode', this.onTakeMode);
         this.connection.on('quit', this.onQuit);
+        this.connection.on('nick', this.onNick);
       },
 
       controllerAs: 'userListCtrl',

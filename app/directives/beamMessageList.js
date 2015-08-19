@@ -129,6 +129,21 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this);
 
+        this.onChannelNick = function(event, data) {
+          var old = data[0];
+          var _new = data[1];
+
+          var identicon = this.genIdenticon(old).toString();
+          this.messages.push({
+            nick: old,
+            message: 'is now known as ' + _new,
+            time: new Date(),
+            identicon: identicon,
+            type: 'action',
+          });
+          $scope.$apply();
+        }.bind(this);
+
         $scope.$on('$destroy', function() {
           this.cleanFunctions.forEach(function(f) {
             f();
@@ -158,6 +173,7 @@ angular.module('beam.directives')
         this.cleanFunctions.push($rootScope.$on(('message|' + this.channel), this.onChannelPrivMessage));
         this.cleanFunctions.push($rootScope.$on(('selfAction|' + this.channel), this.onChannelSelfAction));
         this.cleanFunctions.push($rootScope.$on(('quit|' + this.channel), this.onChannelQuit));
+        this.cleanFunctions.push($rootScope.$on(('nick|' + this.channel), this.onChannelNick));
       },
 
       controllerAs: 'messageListCtrl',
