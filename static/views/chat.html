@@ -12,19 +12,19 @@
     
 <body>
     
+<!-- For storing channel-related information and functionality. -->
+<div id="toolbar">
+
+    <div id="channel-name" class="tool-item noselect">&#35;int0x10</div>
+
+    <div id="channel-topic" class="tool-item">Feminists are to straight men what evangelical christians are to gay men&#46; Deal with it&#33;</div>
+
+    <div class="clear"></div>
+
+</div>
+    
 <!-- Contains all elements and fits to window vertically. -->
 <div id="wrapper">
-    
-    <!-- For storing channel-related information and functionality. -->
-    <div id="toolbar">
-
-        <div id="channel-name" class="tool-item noselect">&#35;int0x10</div>
-        
-        <div id="channel-topic" class="tool-item">Feminists are to straight men what evangelical christians are to gay men&#46; Deal with it&#33;</div>
-        
-        <div class="clear"></div>
-
-    </div>
     
     <!-- Server and channel-related functionality. -->
     <div class="sidebar left">
@@ -34,7 +34,7 @@
         
             <span class="panel-header">
                 
-                <i class="material-icons md-24">chat</i>
+                <i class="material-icons md-24">input</i>
                 Channels
                 
                 <a href="" class="button" title="Join Channel">
@@ -65,6 +65,11 @@
     <!-- Main view for current channel and all chat-related functionality. -->
     <div id="main">
         
+        <span class="panel-header noselect">
+            <i class="material-icons md-24">chat</i>
+            Chat
+        </span>
+        
         <div id="chat">
         
             
@@ -87,39 +92,46 @@
 
             <ul>
 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     Augment
+                    <span class="role op"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     Aurora01
+                    <span class="role owner"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     bacon
+                    <span class="role halfop"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     Cameron
+                    <span class="role voice"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     Chronium
+                    <span class="role"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     splitty_
+                    <span class="role"></span>
                 </a></li>
                 
-                <li><a href="">
+                <li class="user"><a href="">
                     <span class="avatar"><img src=""/></span>
                     Viperidae
+                    <span class="role"></span>
                 </a></li>
 
             </ul>
