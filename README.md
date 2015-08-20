@@ -11,7 +11,7 @@ Beam.io is an IRC client powered by
 and JavaScript (ES5 and AngularJS).
 
 
-## Why choose to use beam.io?
+## :question: Why choose to use beam.io?
 Since its creation in 1988 (27 years ago!), IRC has been one of the greatest 
 and most widely supported chat protocols ever. However, IRC clients themselves
 have barely changed, looking almost no different from 10 years ago, and only
@@ -24,20 +24,28 @@ it's still easy to chat with others. In addition to all of this, we wanted to
 make the client cross-platform, fast and quick to set up. This led to the 
 creation of beam.io, which we hope has all of these features, and more.
 
-## Current Features
+## :star: Current Features
 - Channels and private messaging
 - Identicons for quick, visual representation of users
 - All core IRC commands
 - Graphical interface available for most common commands (e.g. /join)
 
-## Planned Features
+## :notebook_with_decorative_cover: Planned Features
 - Improved, responsive UI
 - Plugin system
 - Theming system
 - Connection to multiple networks
 
-## :construction:For Developers:construction:
-### Building beam.io
+## :bug: Known Bugs
+#### beam.io will not work if the path to it contains accents or other non-ASCII characters
+**Workaround**: Move beam.io to a path without accents.
+
+#### All Bugs
+Please see [this list](https://github.com/Aurora0000/beam.io/labels/bug) for all known bugs.
+
+
+## :construction: For Developers :construction:
+### :wrench: Building beam.io
 
 ```bash
 git clone https://github.com/Aurora0000/beam.io
@@ -47,7 +55,7 @@ npm i electron-prebuilt -g
 electron .
 ```
 
-### Packaging beam.io
+### :package: Packaging beam.io
 (assuming build dependencies installed already)
 ```bash
 npm i gulp -g
@@ -58,7 +66,7 @@ gulp package-platform-arch
 Releases are dropped into releases/beam-platform-arch.zip. **Do not commit 
 release zips**!
 
-### Collaborating
+### :octocat: Collaborating
 Pull requests are welcome. All code must be in ES5 (that means no 
 CoffeeScript, no TypeScript, no ES6!).
 
