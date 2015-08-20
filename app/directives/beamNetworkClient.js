@@ -20,6 +20,7 @@ angular.module('beam.directives')
         if (!configService.canLoad()) {
           // Signal main process to open welcome dialog because settings aren't
           // available.
+          ;
         }
 
         this.connect({
@@ -34,6 +35,14 @@ angular.module('beam.directives')
           ignoreSecure: configService.get('ignoreSecure'),
         });
         this.connection = ircService.get(this.host);
+
+        this.connection.on('ctcp-version', function(from, to) {
+          if (to === this.connection.nick) {
+            var os = require('os');
+            var platform = os.platform() + ' ' + os.arch();
+            this.connection.ctcp(from, 'notice', 'VERSION beam.io v0.1.0-a2 on ' + platform);
+          }
+        }.bind(this));
 
         this.connection.on('error', function(message) {
           console.log('Error in IRC library: ', message);

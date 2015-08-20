@@ -16,6 +16,21 @@ angular.module('beam.directives')
           return new Identicon(md5(nick), 100);
         };
 
+        this.orderFunction = function(user) {
+          switch (user.mode) {
+            case '~':
+              return 0;
+            case '@':
+              return 1;
+            case '%':
+              return 2;
+            case '+':
+              return 3;
+            default:
+              return 4;
+          }
+        };
+
         this.onChannelNames = function(nicks) {
           // We're given the nicks in a useless way (nick is key, mode is value)
           // but we want to sort, so we map it into an array.
@@ -65,6 +80,24 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this);
 
+        this._addMode = function(user, mode) {
+          for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].name === user) {
+              this.users[i].mode = mode;
+              return;
+            }
+          }
+        };
+
+        this._takeMode = function(user) {
+          for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].name === user) {
+              this.users[i].mode = '';
+              return;
+            }
+          }
+        };
+
         this.onAddMode = function(channel, by, mode, argument) {
           if (channel !== this.channel) {
             return;
@@ -72,38 +105,27 @@ angular.module('beam.directives')
 
           if (mode === 'o') {
             // Someone has been oped. Search through and update
-            for (var i = 0; i < this.users.length; i++) {
-              if (this.users[i].name === argument) {
-                this.users[i].mode = '@';
-                return;
-              }
-            }
+            this._addMode(argument, '@');
           } else if (mode === 'v') {
             // Someone has been voiced.
-            for (var i = 0; i < this.users.length; i++) {
-              if (this.users[i].name === argument) {
-                this.users[i].mode = '+';
-                return;
-              }
-            }
+            this._addMode(argument, '+');
+          } else if (mode === 'h') {
+            this._addMode(argument, '%');
+          } else if (mode === 'q') {
+            this._addMode(argument, '~');
           }
 
           $scope.$apply();
         }.bind(this);
 
         this.onTakeMode = function(channel, by, mode, argument) {
-          // TODO: edge cases where user has + and @
+          // TODO: edge cases where user has multiple modes
           if (channel !== this.channel) {
             return;
           }
 
-          if (mode === 'o' || mode === 'v') {
-            for (var i = 0; i < this.users.length; i++) {
-              if (this.users[i].name === argument) {
-                this.users[i].mode = '';
-                return;
-              }
-            }
+          if (mode === 'o' || mode === 'v' || mode === 'q' || mode === 'h') {
+            this._takeMode(argument);
           }
 
           $scope.$apply();
