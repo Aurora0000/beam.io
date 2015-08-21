@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <script>
+        window.$ = window.jQuery = require('../js/jquery.js');
+    </script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/normalize.min.css" />
+    <title>beam.io</title>
+</head>
+    
+<body>
+    
+<!-- For storing channel-related information and functionality. -->
+<div id="toolbar">
+
+    <div id="channel-name" class="tool-item noselect">&#35;int0x10</div>
+
+    <div id="channel-topic" class="tool-item">Feminists are to straight men what evangelical christians are to gay men&#46; Deal with it&#33;</div>
+
+    <div class="clear"></div>
+
+</div>
+    
+<!-- Contains all elements and fits to window vertically. -->
+<div id="wrapper">
+    
+    <!-- Server and channel-related functionality. -->
+    <div class="sidebar left">
+        
+        <!-- Channel list. -->
+        <div id="channels" class="side-panel">
+        
+            <span class="panel-header">
+                
+                <i class="material-icons md-24">input</i>
+                Channels
+                
+                <a href="" class="button" title="Join Channel">
+                    <i class="material-icons md-24">add</i>
+                </a>
+                
+            </span>
+            
+            <ul>
+            
+                <li class="current"><a href="">&#35;int0x10</a></li>
+                <li><a href="">&#35;beamio</a></li>
+                <li><a href="">&#35;cameronisfab</a></li>
+                <li><a href="">&#35;lolbacon</a></li>
+                <li><a href="">&#35;memes</a></li>
+                
+            </ul>
+            
+            <!--<a href="" class="panel-button">
+                <i class="material-icons md-24">add_box</i>
+                Join Channel
+            </a>-->
+        
+        </div>
+
+    </div>
+
+    <!-- Main view for current channel and all chat-related functionality. -->
+    <div id="main">
+        
+        <span class="panel-header noselect">
+            <i class="material-icons md-24">chat</i>
+            Chat
+        </span>
+        
+        <div id="chat">
+        
+            <!-- Template for a message. -->
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                <span class="time noselect">1m</span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span> 
+            </span>
+            
+            <!-- Template for a /me or channel/server-related message. -->
+            <span class="message self">
+                <span class="avatar"><img src=""/></span>
+                <span class="time noselect">now</span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">eats an old lady like a banana.</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+            
+            <span class="message">
+                <span class="avatar"><img src=""/></span>
+                
+                <span class="username">Cameron</span>
+                <span class="content">Here's a message from your friendly neighbourhood Pepperoniron: "my name is Pizzaface and I care what you eat."</span>
+            </span>
+        
+        </div>
+        
+        <div id="chat-bar">
+            <input type="text" value="" />
+            <button type="submit" class="noselect" disabled>Send</button>
+        </div>
+
+    </div>
+    
+    <!-- User-related functionality. -->
+    <div class="sidebar right">
+
+        <!-- User list. -->
+        <div id="users" class="side-panel">
+
+            <span class="panel-header">
+                <i class="material-icons">people</i>
+                Users
+            </span>
+
+            <ul>
+
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    Augment
+                    <span class="role op"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    Aurora01
+                    <span class="role owner"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    bacon
+                    <span class="role halfop"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    Cameron
+                    <span class="role voice"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    Chronium
+                    <span class="role"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    splitty_
+                    <span class="role"></span>
+                </a></li>
+                
+                <li class="user"><a href="">
+                    <span class="avatar"><img src=""/></span>
+                    Viperidae
+                    <span class="role"></span>
+                </a></li>
+
+            </ul>
+
+        </div>
+
+    </div>
+    
+</div>
+
+</body>
+    
+</html>
