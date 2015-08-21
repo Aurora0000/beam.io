@@ -11,7 +11,6 @@ angular.module('beam.directives')
       controller: function($compile, $scope, $rootScope, ircService, configService) {
         this.channels = [];
         this.currentChannel = '';
-        this.host = configService.get('host');
 
         this.connect = function(settings) {
           ircService.connect(settings);
@@ -20,9 +19,10 @@ angular.module('beam.directives')
         if (!configService.canLoad()) {
           // Signal main process to open welcome dialog because settings aren't
           // available.
-          ;
+          require('ipc').send('show-welcome', true);
         }
 
+        this.host = configService.get('host');
         this.connect({
           host: this.host,
           port: configService.get('port'),

@@ -19,17 +19,24 @@ angular.module('beam.services')
       }
 
       this.doc[name] = value;
-      fs.writeFile(this.storageLocation, function(err) {
-        if (!err) {
-          return;
-        }
+    };
 
-        console.error('Error! File could not be saved');
+    this.save = function() {
+      fs.writeFile(this.storageLocation, yaml.safeDump(this.doc), function(err) {
+        if (err) throw err;
       });
     };
 
     this.load = function() {
+      if (!this.canLoad()) {
+        this.doc = {};
+        return;
+      }
+
       this.doc = yaml.safeLoad(fs.readFileSync(this.storageLocation, 'utf8'));
+      if (this.doc === undefined) {
+        this.doc = {};
+      }
     };
 
     this.canLoad = function() {
