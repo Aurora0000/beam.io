@@ -4,7 +4,7 @@ angular.module('beam.services')
     var fs = require('fs');
     var homedir = require('homedir');
     this.doc = null;
-    this.storageLocation = homedir() + '/settings.yaml';
+    this.storageLocation = './settings.yaml';
     this.get = function(name) {
       if (this.doc === null) {
         this.load();
