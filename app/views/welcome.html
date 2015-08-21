@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script>
+    window.$ = window.jQuery = require('../lib/jquery.min.js');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.js"></script>
+  <script src="../lib/angular.min.js"></script>
+  <script src="../lib/angularMoment.min.js"></script>
+  <script src="../lib/pnglib.js"></script>
+  <script src="../lib/identicon.js"></script>
+  <script src="../lib/scrollglue.js"></script>
+  <script src="../../node_modules/ng-tags-input/build/ng-tags-input.min.js"></script>
+  <link rel="stylesheet" href="../../node_modules/ng-tags-input/build/ng-tags-input.min.css" />
+  <script src="../app.js"></script>
+  <script src="../services/ircService.js"></script>
+  <script src="../services/configService.js"></script>
+  <script src="../directives/beamNetworkClient.js"></script>
+  <script src="../directives/beamChannel.js"></script>
+  <script src="../directives/beamMessageList.js"></script>
+  <script src="../directives/beamUserList.js"></script>
+  <script src="../directives/beamMessageBox.js"></script>
+  <script src="../controllers/beamSettingsController.js"></script>
+
+  <title>Welcome - beam.io</title>
+  <style type="text/css">
+    body {
+      background-color: #ecf0f1;
+    }
+
+    body > .grid {
+      height: 100%;
+    }
+
+    .column {
+      max-width: 450px;
+    }
+  </style>
+</head>
+
+<body ng-app="beam">
+  <div ng-controller="beamSettingsController as settingsCtrl">
+    <div class="ui middle aligned center aligned grid">
+      <div class="column">
+        <h2 class="ui red header">
+          Welcome to beam.io
+        </h2>
+
+        <div class="ui message">
+          Beam.io is almost ready to connect. We just need to know where you want to connect, and a couple of other details.
+        </div>
+
+          <div class="ui stacked segment">
+            <form class="ui large form">
+              <h3>Server Settings</h3>
+              <div class="grouped fields">
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="world icon"></i>
+                    <input type="text" ng-model="settings.host" placeholder="Network">
+                  </div>
+                </div>
+                <div class="field" ng-if="settings.advanced">
+                  <div class="ui input">
+                    <input type="number" ng-model="settings.port" placeholder="Port">
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui toggle checkbox">
+                    <input type="checkbox" ng-model="settings.tls">
+                    <label>SSL/TLS</label>
+                  </div>
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <h3>User Settings</h3>
+              <div class="grouped fields">
+                <div class="field">
+                  <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" ng-model="settings.nick" placeholder="Nickname">
+                  </div>
+                </div>
+                <div class="field" ng-show="settings.advanced">
+                  <div class="ui left icon input">
+                    <i class="exchange icon"></i>
+                    <input type="text" ng-model="settings.user" placeholder="Username">
+                  </div>
+                </div>
+                <div class="field" ng-show="settings.advanced">
+                  <div class="ui left icon input">
+                    <i class="tag icon"></i>
+                    <input type="text" ng-model="settings.real" placeholder="Real Name">
+                  </div>
+                </div>
+
+                <div class="ui small info message">
+                  By default, port 6667 (6697 for SSL/TLS) will be used. If you need to use another port, enable
+                  <em>advanced mode</em>.
+                </div>
+              </div>
+            </form>
+            <tags-input ng-model="settings.channels" placeholder="Channels"></tags-input>
+            <div class="ui fluid large red submit button" ng-click="settingsCtrl.save()">Connect</div>
+          </div>
+
+
+      </div>
+    </div>
+
+    <div class="ui top right attached label">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" ng-model="settings.advanced">
+        <label>Advanced Mode</label>
+      </div>
+    </div>
+    <script>
+      $('.ui.dropdown')
+        .dropdown({
+          allowAdditions: true
+        });
+    </script>
+  </div>
+</body>
+
+</html>

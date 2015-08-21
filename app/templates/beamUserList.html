@@ -1,0 +1,22 @@
+<div class="ui alternating relaxed list scrollable">
+  <div class="item" ng-repeat="user in userListCtrl.users | orderBy: 'name' | orderBy:userListCtrl.orderFunction">
+    <img class="ui avatar image" ng-src="{{'data:image/png;base64,' + user.identicon}}">
+    <div class="content">
+      <span class="header">
+        <span class="ui blue label" ng-if="user.mode === '~'">
+            Owner
+        </span>
+
+        <span class="ui red label" ng-if="user.mode === '@'">
+          Op
+        </span>
+
+        <span class="ui orange label" ng-if="user.mode === '+'">
+          Voice
+        </span>
+        {{user.name}}
+      </span>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="message box">
+  <form class="ui form" ng-submit="messageBoxCtrl.send(message)">
+    <div class="field">
+      <div class="ui action input">
+        <!-- need to use node-spellchecker or something -->
+        <input ng-model="message" spellcheck="true" lang="en" type="text" placeholder="Message" />
+        <a class="ui red button" style="border-radius:0;">Send</a>
+      </div>
+    </div>
+  </form>
+</div>

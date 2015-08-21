@@ -1,5 +1,6 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var app = require('app'); // Module to control application life.
+var ipc = require('ipc');
+var BrowserWindow = require('browser-window');
 
 // Report crashes to our server.
 //require('crash-reporter').start();
@@ -7,6 +8,7 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
 var mainWindow = null;
+var welcomeWindow = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -21,10 +23,11 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 600, height: 700});
-
-  // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/static/views/chat.html');
+  mainWindow = new BrowserWindow({
+    width: 600,
+    height: 700,
+  });
+  mainWindow.loadUrl('file://' + __dirname + '/app/views/chat.html');
 
   // Open the devtools.
   //mainWindow.openDevTools();
@@ -35,5 +38,27 @@ app.on('ready', function() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+
+  ipc.on('show-welcome', function() {
+    mainWindow.close();
+    welcomeWindow = new BrowserWindow({
+      width: 600,
+      height: 700,
+    });
+    welcomeWindow.loadUrl('file://' + __dirname + '/app/views/welcome.html');
+
+    welcomeWindow.on('closed', function() {
+      welcomeWindow = null;
+    });
+  });
+
+  ipc.on('welcome-done', function() {
+    welcomeWindow.close();
+    mainWindow = new BrowserWindow({
+      width: 600,
+      height: 700,
+    });
+    mainWindow.loadUrl('file://' + __dirname + '/app/views/chat.html');
   });
 });

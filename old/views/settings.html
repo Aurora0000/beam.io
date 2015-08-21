@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        window.$ = window.jQuery = require('../js/jquery.js');
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.0.1/semantic.min.js"></script>
+    <title>Welcome - beam.io</title>
+    <style type="text/css">
+        body {
+            background-color: #ecf0f1;
+        }
+
+        body > .grid {
+            height: 100%;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="ui center aligned red header">
+        Beam.io Settings
+    </h1>
+    <div class="ui center aligned grid">
+        <div class="column">
+            <h2>Default Networks</h2>
+
+            <form class="ui form">
+                <div class="ui stacked segment">
+                    <div class="ui relaxed divided list">
+                        <div class="item">
+                            <div class="header">Freenode (<code>irc.freenode.net</code>)</div>
+                            <div>#programming, #xyz, #abcdef</div>
+                        </div>
+                        <div class="item">
+                            <div class="header">int0x10Net (<code>int0x10.com</code>)</div>
+                            <div>#int0x10, #beamio</div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Default Networks</h2>
+
+            <form class="ui form">
+                <div class="ui stacked segment">
+                    <div class="ui relaxed divided list">
+                        <div class="item">
+                            <div class="header">Freenode (<code>irc.freenode.net</code>)</div>
+                            <div>#programming, #xyz, #abcdef</div>
+                        </div>
+                        <div class="item">
+                            <div class="header">int0x10Net (<code>int0x10.com</code>)</div>
+                            <div>#int0x10, #beamio</div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="ui bottom right attached label">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" id="advanced">
+            <label>Advanced Mode</label>
+        </div>
+    </div>
+    <script>
+        $('.ui.dropdown.chans')
+            .dropdown({
+                allowAdditions: true
+            });
+    </script>
+</body>
+
+</html>

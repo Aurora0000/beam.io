@@ -1,0 +1,26 @@
+<div class="ui relaxed list scrollable" id="messageList" scroll-glue>
+  <div class="item" ng-repeat="message in messageListCtrl.messages">
+    <div class="flex box" ng-if="message.type === 'message'">
+      <div class="flex for avatar">
+        <img ng-src="{{::('data:image/png;base64,' + message.identicon)}}" style="margin-left: auto; margin-right: auto; display: block;" class="ui mini circular image">
+        <span ng-bind="::message.nick"></span>
+      </div>
+      <div class="flex for message">
+        <div class="ui segment">
+          <span ng-bind="::message.message">
+          </span>
+
+          <div class="ui bottom right attached label"><abbr ng-attr-title="{{::message.time | amDateFormat: 'dddd Do MMMM, H:mm'}}" am-time-ago="message.time"></abbr></div>
+        </div>
+      </div>
+    </div>
+    <div class="ui floating message" ng-if="message.type === 'action'">
+      <div class="ui label">
+        <img ng-src="{{::('data:image/png;base64,' + message.identicon)}}" class="ui right spaced avatar image">
+        <span ng-bind="::message.nick"></span>
+      </div>
+      <span ng-bind="::message.message"></span>
+      <div class="ui bottom right attached label"><abbr ng-attr-title="{{::message.time | amDateFormat: 'dddd Do MMMM, H:mm'}}" am-time-ago="message.time"></abbr></div>
+    </div>
+  </div>
+</div>
