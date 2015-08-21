@@ -115,7 +115,7 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
                         span.role.voice { background-color: #27ae60; }
                         .side-panel ul li a:hover span.role.voice:after { content: "Voice"; }
 
-                .side-panel ul li.current-item a { color: rgba(0, 0, 0, 1); font-weight: bold; }
+                .side-panel ul li.current a { color: rgba(0, 0, 0, 1); font-weight: bold; }
 
 #main { border: 1px solid rgba(0, 0, 0, 0.1); border-top: 0; border-bottom: 0; height: 100%; max-height: 100%; width: calc(100% - 26em); box-sizing: border-box; float: left; }
 
@@ -123,11 +123,22 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
 
     #chat { padding: 1em; width: auto; max-height: calc(100% - 10.7rem); overflow: auto; }
 
-        #chat .message { border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: block; font-size: 0.8rem; line-height: 1.2rem; padding-bottom: 1rem; }
-        #chat .message:last-of-type { border-bottom: 0; }
+        #chat .message { border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: block; font-size: 0.8rem; line-height: 1.2rem; padding: 1.3rem 0; clear: both; position: relative; }
+        #chat .message:first-of-type { padding-top: 0.3rem; }
+        #chat .message:last-of-type { border-bottom: 0; padding-bottom: 0; }
 
-            #chat .message .avatar { background: #000; margin: 0 0.8rem 0 0; }
+            #chat .message .avatar { background: #000; margin: -0.3rem 0.8rem 0 0; }
             #chat .message .username { font-weight: bold; }
+            #chat .message .username:after { content: ":"; }
+
+            #chat .message .time { display: block; float: right; right: 0; top: 0.8rem; padding-left: 0.8rem; text-align: center; font-size: 0.7rem; color: rgba(0, 0, 0, 0.4); }
+            #chat .message:first-of-type .time { top: 0; }
+
+            #chat .message .content { padding-right: 0.8rem;  }
+
+        /* For /me and channel/server-related messages */
+        #chat .message.self { font-weight: bold; }
+        #chat .message.self .username:after { content: ""; }
 
     #chat-bar { bottom: 0; left: 0; right: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); box-sizing: border-box; font-size: 0.8rem; }
 
