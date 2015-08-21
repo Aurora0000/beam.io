@@ -2,7 +2,6 @@ angular.module('beam.services')
   .service('configService', function() {
     var yaml = require('js-yaml');
     var fs = require('fs');
-    var homedir = require('homedir');
     this.doc = null;
     this.storageLocation = './settings.yaml';
     this.get = function(name) {
