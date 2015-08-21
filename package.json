@@ -10,7 +10,7 @@
   "author": "Aurora0000",
   "license": "MIT",
   "devDependencies": {
-    "electron-prebuilt": "~0.30.4",
+    "electron-prebuilt": "~0.31.0",
     "gulp": "~3.9.0",
     "gulp-atom-electron": "~0.16.0"
   },
