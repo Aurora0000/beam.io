@@ -144,6 +144,148 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this);
 
+        this.onAddMode = function(channel, by, mode, argument) {
+          if (channel !== this.channel) {
+            return;
+          }
+
+          var identicon = this.genIdenticon(by).toString();
+
+          if (argument == null) {
+            this.messages.push({
+              nick: by,
+              message: 'set mode +' + mode,
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+          } else {
+            // Probably a user mode
+            if (mode === 'o') {
+              this.messages.push({
+                nick: by,
+                message: 'made ' + argument + ' an operator',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'q') {
+              this.messages.push({
+                nick: by,
+                message: 'made ' + argument + ' an owner',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'v') {
+              this.messages.push({
+                nick: by,
+                message: 'gave ' + argument + ' voice permissions',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'h') {
+              this.messages.push({
+                nick: by,
+                message: 'made ' + argument + ' a half-op',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'b') {
+              this.messages.push({
+                nick: by,
+                message: 'banned anyone with the hostmask ' + argument,
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else {
+              this.messages.push({
+                nick: by,
+                message: 'set mode +' + mode + ' on ' + argument,
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            }
+          }
+
+          $scope.$apply();
+        }.bind(this);
+
+        this.onTakeMode = function(channel, by, mode, argument) {
+          if (channel !== this.channel) {
+            return;
+          }
+
+          var identicon = this.genIdenticon(by).toString();
+
+          if (argument == null) {
+            this.messages.push({
+              nick: by,
+              message: 'unset mode +' + mode,
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+          } else {
+            // Probably a user mode
+            if (mode === 'o') {
+              this.messages.push({
+                nick: by,
+                message: 'removed ' + argument + '\'s operator permissions',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'q') {
+              this.messages.push({
+                nick: by,
+                message: 'removed ' + argument + '\s owner permissions',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'v') {
+              this.messages.push({
+                nick: by,
+                message: 'removeed ' + argument + '\'s voice permissions',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'h') {
+              this.messages.push({
+                nick: by,
+                message: 'removed ' + argument + '\'s half-op permissions',
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else if (mode === 'b') {
+              this.messages.push({
+                nick: by,
+                message: 'unbanned anyone with the hostmask ' + argument,
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            } else {
+              this.messages.push({
+                nick: by,
+                message: 'unset mode +' + mode + ' on ' + argument,
+                time: new Date(),
+                identicon: identicon,
+                type: 'action',
+              });
+            }
+          }
+
+          $scope.$apply();
+        }.bind(this);
+
         $scope.$on('$destroy', function() {
           this.cleanFunctions.forEach(function(f) {
             f();
@@ -154,6 +296,8 @@ angular.module('beam.directives')
           this.connection.removeListener(('join' + this.channel), this.onChannelJoin);
           this.connection.removeListener(('part' + this.channel), this.onChannelPart);
           this.connection.removeListener(('kick' + this.channel), this.onChannelKick);
+          this.connection.removeListener('+mode', this.onAddMode);
+          this.connection.removeListener('-mode', this.onTakeMode);
         }.bind(this));
 
         this.channel = $scope.channel;
@@ -166,6 +310,8 @@ angular.module('beam.directives')
         this.connection.on(('join' + this.channel), this.onChannelJoin);
         this.connection.on(('part' + this.channel), this.onChannelPart);
         this.connection.on(('kick' + this.channel), this.onChannelKick);
+        this.connection.on('+mode', this.onAddMode);
+        this.connection.on('-mode', this.onTakeMode);
 
         this.cleanFunctions.push($rootScope.$on(('selfMessage|' + this.channel), this.onChannelSelfMessage));
 
