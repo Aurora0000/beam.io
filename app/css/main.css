@@ -93,6 +93,8 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
             #channels ul li .button { position: absolute; top: 0; right: 0; bottom: 0; height: calc(1rem - 1px); line-height: 1rem; color: rgba(0, 0, 0, 0.4); background-color: rgb(255, 255, 255); }
             #channels ul li .button:hover { border-left: 0; color: rgb(255, 255, 255); background-color: #e74c3c; }
 
+            #channels.noclose ul li .button { display: none; }
+
             #channels ul li:hover .button { border-left: 1px solid rgba(0, 0, 0, 0.1); }
 
         .side-panel .content { overflow: auto; height: 100%; }

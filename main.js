@@ -24,8 +24,10 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 600,
-    height: 700,
+      width: 800,
+      height: 600,
+      'min-width': 800,
+      'min-height': 600,
   });
   mainWindow.loadUrl('file://' + __dirname + '/app/views/chat.html');
 
@@ -43,8 +45,10 @@ app.on('ready', function() {
   ipc.on('show-welcome', function() {
     mainWindow.close();
     welcomeWindow = new BrowserWindow({
-      width: 600,
-      height: 700,
+      width: 800,
+      height: 600,
+      'min-width': 800,
+      'min-height': 600,
     });
     welcomeWindow.loadUrl('file://' + __dirname + '/app/views/welcome.html');
 

@@ -24,6 +24,9 @@
       <ul>
         <li ng-repeat="channel in clientCtrl.channels" ng-class="{current: clientCtrl.currentChannel === channel}" ng-click="clientCtrl.setActiveChannel(channel)">
           <a href="" ng-bind="channel"></a>
+            <a href="" class="button" ng-click="clientCtrl.partChannel(channel)" title="Close Channel">
+                <i class="material-icons md-18">close</i>
+            </a>
         </li>
       </ul>
     </div>
