@@ -13,6 +13,10 @@ angular.module('beam.directives')
         this.topics = {};
         this.currentChannel = '';
 
+        this.onRegistered = function() {
+          this.connected = true;
+        }.bind(this);
+
         this.setTopic = function(channel, topic) {
           this.topics[channel] = topic;
         };
@@ -40,6 +44,8 @@ angular.module('beam.directives')
           ignoreSecure: configService.get('ignoreSecure'),
         });
         this.connection = ircService.get(this.host);
+
+        this.connection.on('registered', this.onRegistered);
 
         this.connection.on('ctcp-version', function(from, to) {
           if (to === this.connection.nick) {

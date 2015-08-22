@@ -1,5 +1,5 @@
 <!-- For storing channel-related information and functionality. -->
-<div id="toolbar">
+<div id="toolbar" ng-show="clientCtrl.connected">
 
   <div id="channel-name" class="tool-item noselect" ng-bind="clientCtrl.currentChannel"></div>
 
@@ -10,7 +10,7 @@
 </div>
 
 <!-- Contains all elements and fits to window vertically. -->
-<div id="wrapper">
+<div id="wrapper" ng-show="clientCtrl.connected">
   <!-- Server and channel-related functionality. -->
   <div class="sidebar left">
     <!-- Channel list. -->
@@ -32,4 +32,9 @@
 
   <beam-channel ng-repeat="channel in clientCtrl.channels" host="{{clientCtrl.host}}" channel="{{channel}}" ng-show="clientCtrl.currentChannel === '{{channel}}'"></beam-channel>
 
+</div>
+<div ng-show="!clientCtrl.connected">
+  <h1>Connecting to
+    <span ng-bind="::clientCtrl.host"></span>
+  </h1>
 </div>
