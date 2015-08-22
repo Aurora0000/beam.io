@@ -1,49 +1,35 @@
 /* --------------- */
-
-
 /* Generic Classes */
-
-
 /* --------------- */
 
-
 /* Use in containers after floated divs to give the container a proper height. */
-
-.clear {
-  clear: both;
-}
+.clear { clear: both; }
 
 /* Use for floating, particularly sidebars. */
-
-.left {
-  float: left;
-}
-.right {
-  float: right;
-}
+.left { float: left; }
+.right { float: right; }
 
 /* -------------- */
-
-
 /* Material Icons */
-
-
 /* -------------- */
 
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(../fonts/MaterialIcons-Regular.eot);
-  /* For IE6-8 */
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.woff2) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
-  /* Preferred icon size */
+  font-size: 24px;  /* Preferred icon size */
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -51,305 +37,120 @@
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
+
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
+
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
+
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
-.material-icons.md-18 {
-  font-size: 18px;
-}
-.material-icons.md-24 {
-  font-size: 24px;
-}
-.material-icons.md-36 {
-  font-size: 36px;
-}
-.material-icons.md-48 {
-  font-size: 48px;
-}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
 
 /* -------------- */
-
-
 /* General Styles */
-
-
 /* -------------- */
-
 
 /* Disable text selection. */
-
-.noselect, .sidebar {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-}
+.noselect, .sidebar { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; cursor: default; }
 
 /* Fit to window height, no scrollbars. */
+html, body, #wrapper { height: 100%; overflow: hidden; }
 
-html, body, #wrapper {
-  height: 100%;
-  overflow: hidden;
-}
-#toolbar {
-  background-color: rgb(25, 25, 25);
-  clear: both;
-  width: 100%;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.8em;
-}
-.tool-item {
-  line-height: 3rem;
-  box-sizing: border-box;
-  padding: 0 1rem;
-  height: 3rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  float: left;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-#channel-name {
-  font-size: 1.5em;
-  font-weight: bold;
-  max-width: 20%;
-}
-#channel-topic {
-  color: rgba(255, 255, 255, 0.5);
-  float: none;
-}
-.sidebar, #chat {
-  width: 13em;
-  overflow: auto;
-  height: 100%;
-  max-height: calc(100% - 3rem);
-}
-.side-panel {}
-.panel-header {
-  font-size: 1.2em;
-  padding: 1rem 1rem 0.8rem 1rem;
-  display: block;
-  box-sizing: border-box;
-}
-.panel-header i {
-  float: left;
-  margin-right: 0.5rem;
-  margin-top: -0.1rem;
-}
-.panel-header .button {
-  float: right;
-  margin: -1rem -1rem -0.8rem 0;
-  display: block;
-  color: rgba(0, 0, 0, 0.6);
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  height: 3.2rem;
-  width: 3.2rem;
-  text-align: center;
-  line-height: 4rem;
-}
-.panel-header .button i {
-  float: none;
-  margin: 0;
-}
-.side-panel ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.side-panel ul li {
-  font-size: 0.8em;
-  display: block;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-.side-panel ul li a {
-  display: block;
-  padding: 0.8rem 1rem;
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.8);
-  position: relative;
-}
-.side-panel ul li a:hover, .panel-header .button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.avatar {
-  display: block;
-  margin: -0.5rem 0.8rem -0.5rem 0;
-  float: left;
-  width: 1.9rem;
-  height: 1.9rem;
-}
-.avatar img {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
+#toolbar { background-color: rgb(25,25,25); clear: both; width: 100%; color: rgba(255, 255, 255, 0.8); font-size: 0.8em; }
 
-span.role {
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  padding: 0.8rem 0;
-  width: 0.4rem;
-  color: rgba(255, 255, 255, 1);
-  transition: all 0.1s ease-in-out;
-  background: #333;
-}
-.side-panel ul li a:hover span.role {
-  width: auto;
-  padding: 0.8rem 1rem;
-}
-.side-panel ul li a:hover span.role:after {
-  content: "User";
-}
+    .tool-item { line-height: 3rem; box-sizing: border-box; padding: 0 1rem; height: 3rem; border-right: 1px solid rgba(255, 255, 255, 0.1); float: left; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 
-/* User Roles */
+        #channel-name { font-size: 1.5em; font-weight: bold; max-width: 20%; }
 
-span.role.owner {
-  background-color: #e74c3c;
-}
-.side-panel ul li a:hover span.role.owner:after {
-  content: "Owner";
-}
-span.role.op {
-  background-color: #e67e22;
-}
-.side-panel ul li a:hover span.role.op:after {
-  content: "Op";
-}
-span.role.halfop {
-  background-color: #3498db;
-}
-.side-panel ul li a:hover span.role.halfop:after {
-  content: "Half-Op";
-}
-span.role.voice {
-  background-color: #27ae60;
-}
-.side-panel ul li a:hover span.role.voice:after {
-  content: "Voice";
-}
-.side-panel ul li.current a {
-  color: rgba(0, 0, 0, 1);
-  font-weight: bold;
-}
-#main {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-top: 0;
-  border-bottom: 0;
-  height: 100%;
-  max-height: 100%;
-  width: calc(100% - 26em);
-  box-sizing: border-box;
-  float: left;
-}
-#main .panel-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
-#chat {
-  padding: 1em;
-  width: auto;
-  max-height: calc(100% - 10.7rem);
-  overflow: auto;
-}
-#chat .message {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  display: block;
-  font-size: 0.8rem;
-  line-height: 1.2rem;
-  padding: 1.3rem 0;
-  clear: both;
-  position: relative;
-}
-#chat .message:first-of-type {
-  padding-top: 0.3rem;
-}
-#chat .message:last-of-type {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-#chat .message .avatar {
-  background: #000;
-  margin: -0.3rem 0.8rem 0 0;
-}
-#chat .message .username {
-  font-weight: bold;
-}
-#chat .message .username:after {
-  content: ":";
-}
-#chat .message .time {
-  display: block;
-  float: right;
-  right: 0;
-  top: 0.8rem;
-  padding-left: 0.8rem;
-  text-align: center;
-  font-size: 0.7rem;
-  color: rgba(0, 0, 0, 0.4);
-}
-#chat .message:first-of-type .time {
-  top: 0;
-}
-#chat .message .content {
-  padding-right: 0.8rem;
-}
+        #channel-topic { color: rgba(255, 255, 255, 0.5); float: none; }
 
-/* For /me and channel/server-related messages */
+.sidebar, #chat { width: 13em; overflow: auto; height: 100%; max-height: calc(100% - 3rem); }
 
-#chat .message.self {
-  font-weight: bold;
-}
-#chat .message.self .username:after {
-  content: "";
-}
-#chat-bar {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  font-size: 0.8rem;
-}
-#chat-bar input {
-  width: calc(100% - 7rem);
-  margin: 0;
-  padding: 0.8rem;
-  border: 0;
-}
-#chat-bar input:focus {
-  border: 0;
-  outline: 0;
-}
-#chat-bar button {
-  margin: 0;
-  padding: 0.8rem;
-  width: 5.4rem;
-  border: 0;
-  float: right;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #fff;
-  background-color: #e74c3c;
-}
-#chat-bar button:hover {
-  opacity: 0.9;
-}
-#chat-bar button:disabled {
-  background: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.5);
-}
-#chat-bar button:disabled:hover {
-  opacity: 1;
-}
+    .side-panel {  }
+
+        .panel-header { font-size: 1.2em; padding: 1rem 1rem 0.8rem 1rem; display: block; box-sizing: border-box; }
+
+            .panel-header i { float: left; margin-right: 0.5rem; margin-top: -0.1rem; }
+
+                .panel-header .button { float: right; margin: -1rem -1rem -0.8rem 0; display: block; color: rgba(0, 0, 0, 0.6); border-left: 1px solid rgba(0, 0, 0, 0.1); height: 3.2rem; width: 3.2rem; text-align: center; line-height: 4rem; }
+                .panel-header .button i { float: none; margin: 0; }
+
+        .side-panel ul { list-style: none; padding: 0; margin: 0; }
+
+            .side-panel ul li { font-size: 0.8em; display: block; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+
+                .side-panel ul li a { display: block; padding: 0.8rem 1rem; text-decoration: none; color: rgba(0, 0, 0, 0.8); position: relative; }
+                .side-panel ul li a:hover, .panel-header .button:hover { background-color: rgba(0, 0, 0, 0.05); }
+
+                    .avatar { display: block; margin: -0.5rem 0.8rem -0.5rem 0; float: left; width: 1.9rem; height: 1.9rem; }
+                    .avatar img { width: 100%; height: 100%; background: #fff; }
+
+                    .side-panel ul li a .avatar {  }
+                    .side-panel ul li a .avatar img { }
+
+                    span.role { display: block; position: absolute; top: 0; bottom: 0; right: 0; padding: 0.8rem 0; width: 0.4rem; color: rgba(255, 255, 255, 1); transition: all 0.1s ease-in-out; background: #333; }
+                    .side-panel ul li a:hover span.role { width: auto; padding: 0.8rem 1rem; }
+                    .side-panel ul li a:hover span.role:after { content: "User"; }
+
+                        /* User Roles */
+
+                        span.role.owner { background-color: #e74c3c; }
+                        .side-panel ul li a:hover span.role.owner:after { content: "Owner"; }
+
+                        span.role.op { background-color: #e67e22; }
+                        .side-panel ul li a:hover span.role.op:after { content: "Op"; }
+
+                        span.role.halfop { background-color: #3498db; }
+                        .side-panel ul li a:hover span.role.halfop:after { content: "Half-Op"; }
+
+                        span.role.voice { background-color: #27ae60; }
+                        .side-panel ul li a:hover span.role.voice:after { content: "Voice"; }
+
+                .side-panel ul li.current a { color: rgba(0, 0, 0, 1); font-weight: bold; }
+
+        #users .panel-header .count { color: rgba(0, 0, 0, 0.6); }
+        #users .panel-header .count:before { content: "("; }
+        #users .panel-header .count:after { content: ")"; }
+
+#main { border: 1px solid rgba(0, 0, 0, 0.1); border-top: 0; border-bottom: 0; height: 100%; max-height: 100%; width: calc(100% - 26em); box-sizing: border-box; float: left; }
+
+    #main .panel-header { border-bottom: 1px solid rgba(0, 0, 0, 0.1); box-sizing: border-box; }
+
+    #chat { padding: 1em; width: auto; max-height: calc(100% - 10.7rem); overflow: auto; }
+
+        #chat .message { border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: block; font-size: 0.8rem; line-height: 1.2rem; padding: 1.3rem 0; clear: both; position: relative; }
+        #chat .message:first-of-type { padding-top: 0.3rem; }
+        #chat .message:last-of-type { border-bottom: 0; padding-bottom: 0; }
+
+            #chat .message .avatar { background: #000; margin: -0.3rem 0.8rem 0 0; }
+            #chat .message .username { font-weight: bold; }
+            #chat .message .username:after { content: ":"; }
+
+            #chat .message .time { display: block; float: right; right: 0; top: 0.8rem; padding-left: 0.8rem; text-align: center; font-size: 0.7rem; color: rgba(0, 0, 0, 0.4); }
+            #chat .message:first-of-type .time { top: 0; }
+
+            #chat .message .content { padding-right: 0.8rem;  }
+
+        /* For /me and channel/server-related messages */
+        #chat .message.self { font-weight: bold; }
+        #chat .message.self .username:after { content: ""; }
+
+    #chat-bar { bottom: 0; left: 0; right: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); box-sizing: border-box; font-size: 0.8rem; }
+
+        #chat-bar input { width: calc(100% - 7rem); margin: 0; padding: 0.8rem; border: 0; }
+        #chat-bar input:focus { border: 0; outline: 0; }
+
+        #chat-bar button { margin: 0; padding: 0.8rem; width: 5.4rem; border: 0; float: right; text-transform: uppercase; font-weight: bold; color: #fff; background-color: #e74c3c; }
+        #chat-bar button:hover { opacity: 0.9; }
+
+        #chat-bar button:disabled { background: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.5); }
+        #chat-bar button:disabled:hover { opacity: 1; }
