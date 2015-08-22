@@ -1,22 +1,13 @@
-<div class="ui alternating relaxed list scrollable">
-  <div class="item" ng-repeat="user in userListCtrl.users | orderBy: 'name' | orderBy:userListCtrl.orderFunction">
-    <img class="ui avatar image" ng-src="{{'data:image/png;base64,' + user.identicon}}">
-    <div class="content">
-      <span class="header">
-        <span class="ui blue label" ng-if="user.mode === '~'">
-            Owner
-        </span>
-
-        <span class="ui red label" ng-if="user.mode === '@'">
-          Op
-        </span>
-
-        <span class="ui orange label" ng-if="user.mode === '+'">
-          Voice
-        </span>
-        {{user.name}}
-      </span>
-
-    </div>
-  </div>
+<div id="users" class="side-panel">
+    <span class="panel-header">
+        <i class="material-icons">people</i>
+        Users
+    </span>
+    <ul>
+        <li class="user" ng-repeat="user in userListCtrl.users | orderBy: 'name' | orderBy: userListCtrl.orderFunction"><a href="">
+            <span class="avatar"><img ng-src="{{'data:image/png;base64,' + user.identicon}}"/></span>
+            {{user.name}}
+            <span class="role" ng-class="{op: user.mode === '@', owner: user.mode === '~', halfop: user.mode === '%', voice: user.mode === '+'}"></span>
+        </a></li>
+    </ul>
 </div>

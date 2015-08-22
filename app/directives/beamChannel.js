@@ -13,7 +13,7 @@ angular.module('beam.directives')
         this.connection = ircService.get(this.host);
         this.setTopic = function(channel, topic, nick, message) {
           if (channel === this.channel) {
-            this.topic = topic;
+            $scope.$parent.clientCtrl.setTopic(channel, topic);
             $scope.$apply();
           }
         }.bind(this);

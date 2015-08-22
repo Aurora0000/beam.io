@@ -10,7 +10,12 @@ angular.module('beam.directives')
       },
       controller: function($compile, $scope, $rootScope, ircService, configService) {
         this.channels = [];
+        this.topics = {};
         this.currentChannel = '';
+
+        this.setTopic = function(channel, topic) {
+          this.topics[channel] = topic;
+        };
 
         this.connect = function(settings) {
           ircService.connect(settings);
@@ -81,6 +86,7 @@ angular.module('beam.directives')
         this.addChannel = function(channel) {
           if (this.channels.indexOf(channel) === -1) {
             this.channels.push(channel);
+            this.topics[channel] = {};
           }
         };
 

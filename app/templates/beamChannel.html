@@ -1,17 +1,19 @@
-<div class="ui top attached inverted menu" style="border-radius: 0;">
-  <div class="item">
-    <h3 ng-bind="::channelCtrl.channel"></h3>
-  </div>
-  <div class="item">
-    <p ng-bind="channelCtrl.topic"></p>
-  </div>
-</div>
-<div class="ui grid">
-  <div class="eleven wide column">
+<!-- Main view for current channel and all chat-related functionality. -->
+<div id="main">
+
+    <span class="panel-header noselect">
+        <i class="material-icons md-24">chat</i>
+        Chat
+    </span>
     <beam-message-list host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-message-list>
-  </div>
-  <div class="five wide column">
-    <beam-user-list host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-user-list>
-  </div>
+    <beam-message-box host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-message-box>
+
 </div>
-<beam-message-box host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-message-box>
+
+<!-- User-related functionality. -->
+<div class="sidebar right">
+
+    <!-- User list. -->
+    <beam-user-list host="{{channelCtrl.host}}" channel="{{channelCtrl.channel}}"></beam-user-list>
+
+</div>
