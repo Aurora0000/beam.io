@@ -293,6 +293,43 @@ angular.module('beam.directives')
           $scope.$apply();
         }.bind(this);
 
+        this.onWhois = function(info) {
+          if (info.channels.indexOf(this.channel) !== -1) {
+            // Only show in channels where the user is in.
+            var identicon = this.genIdenticon(info.nick).toString();
+            this.messages.push({
+              nick: info.nick,
+              message: 'has host "' + info.nick + '!' + info.user + '@' + info.host + '"',
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+            this.messages.push({
+              nick: info.nick,
+              message: 'has real name "' + info.realname + '"',
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+            this.messages.push({
+              nick: info.nick,
+              message: 'is in the channels ' + info.channels.join(', '),
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+            this.messages.push({
+              nick: info.nick,
+              message: 'is on the server ' + info.server + ' (' + info.serverinfo + ')',
+              time: new Date(),
+              identicon: identicon,
+              type: 'action',
+            });
+
+            $scope.$apply();
+          }
+        }.bind(this);
+
         $scope.$on('$destroy', function() {
           this.cleanFunctions.forEach(function(f) {
             f();
@@ -305,6 +342,7 @@ angular.module('beam.directives')
           this.connection.removeListener(('kick' + this.channel), this.onChannelKick);
           this.connection.removeListener('+mode', this.onAddMode);
           this.connection.removeListener('-mode', this.onTakeMode);
+          this.connection.removeListener('whois', this.onWhois);
         }.bind(this));
 
         this.channel = $scope.channel;
@@ -319,6 +357,7 @@ angular.module('beam.directives')
         this.connection.on(('kick' + this.channel), this.onChannelKick);
         this.connection.on('+mode', this.onAddMode);
         this.connection.on('-mode', this.onTakeMode);
+        this.connection.on('whois', this.onWhois);
 
         this.cleanFunctions.push($rootScope.$on(('selfMessage|' + this.channel), this.onChannelSelfMessage));
 

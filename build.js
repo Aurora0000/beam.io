@@ -23,7 +23,7 @@ packager({
   out: 'release',
 }, function(err, appPath) {
   if (err) throw err;
-  console.log('Zipping...');
+  console.log('Zipping from ' + appPath);
   zip.folder(appPath);
   zip.writeToFile('release/beam-' + platform + '-' + arch + '.zip');
 });
