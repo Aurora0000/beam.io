@@ -1,7 +1,7 @@
 <div id="users" class="side-panel">
     <span class="panel-header">
         <i class="material-icons">people</i>
-        Users <span class="user-count">{{userListCtrl.users.length}}</span>
+        Users <span class="count">{{userListCtrl.users.length}}</span>
     </span>
     <ul>
         <li class="user" ng-repeat="user in userListCtrl.users | orderBy: 'name' | orderBy: userListCtrl.orderFunction"><a href="">
