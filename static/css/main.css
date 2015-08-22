@@ -73,6 +73,9 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
 
         #channel-topic { color: rgba(255, 255, 255, 0.5); float: none; }
 
+            #channel-topic a { color: rgba(255, 255, 255, 0.5); text-decoration: none; }
+            #channel-topic a:hover { text-decoration: underline; }
+
 .sidebar, #chat { width: 13em; overflow: auto; height: 100%; max-height: calc(100% - 3rem); }
 
     .side-panel {  }
@@ -127,6 +130,8 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
 
     #chat { padding: 1em; width: auto; max-height: calc(100% - 10.7rem); overflow: auto; }
 
+        #chat a { word-break: break-all; }
+
         #chat .message { border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: block; font-size: 0.8rem; line-height: 1.2rem; padding: 1.3rem 0; clear: both; position: relative; }
         #chat .message:first-of-type { padding-top: 0.3rem; }
         #chat .message:last-of-type { border-bottom: 0; padding-bottom: 0; }
@@ -149,8 +154,8 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
         #chat-bar input { width: calc(100% - 7rem); margin: 0; padding: 0.8rem; border: 0; }
         #chat-bar input:focus { border: 0; outline: 0; }
 
-        #chat-bar button { margin: 0; padding: 0.8rem; width: 5.4rem; border: 0; float: right; text-transform: uppercase; font-weight: bold; color: #fff; background-color: #e74c3c; }
-        #chat-bar button:hover { opacity: 0.9; }
+        #chat-bar button { margin: 0; padding: 0.8rem; width: 5.4rem; border: 0; float: right; text-transform: uppercase; font-weight: bold; color: #fff; background-color: #e74c3c; cursor: pointer; }
+        #chat-bar button:hover { opacity: 0.9; cursor: default; }
 
         #chat-bar button:disabled { background: rgba(0, 0, 0, 0.1); color: rgba(0, 0, 0, 0.5); }
         #chat-bar button:disabled:hover { opacity: 1; }
