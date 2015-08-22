@@ -1,5 +1,5 @@
 # beam.io
-[![Download](https://img.shields.io/badge/release-v0.1.0--alpha2-blue.svg)](https://github.com/Aurora0000/beam.io/releases/latest)
+[![Download](https://img.shields.io/badge/release-v0.1.0--alpha3-blue.svg)](https://github.com/Aurora0000/beam.io/releases/latest)
 [![Dependency Status](https://david-dm.org/Aurora0000/beam.io.svg)](https://david-dm.org/Aurora0000/beam.io)
 [![devDependency Status](https://david-dm.org/Aurora0000/beam.io/dev-status.svg)](https://david-dm.org/Aurora0000/beam.io#info=devDependencies)
 
