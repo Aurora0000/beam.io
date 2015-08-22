@@ -76,20 +76,30 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
             #channel-topic a { color: rgba(255, 255, 255, 0.5); text-decoration: none; }
             #channel-topic a:hover { text-decoration: underline; }
 
-.sidebar, #chat { width: 13em; overflow: auto; height: 100%; max-height: calc(100% - 3rem); }
+#chat, .sidebar { width: 13em; overflow: auto; height: 100%; max-height: calc(100% - 3rem); }
+.sidebar { overflow: hidden; }
 
-    .side-panel {  }
+    .side-panel { height: 100%; max-height: calc(100% - 3rem); }
 
-        .panel-header { font-size: 1.2em; padding: 1rem 1rem 0.8rem 1rem; display: block; box-sizing: border-box; }
+        .panel-header { font-size: 1.2em; padding: 1rem 1rem 0.8rem 1rem; display: block; box-sizing: border-box; border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
 
             .panel-header i { float: left; margin-right: 0.5rem; margin-top: -0.1rem; }
 
-                .panel-header .button { float: right; margin: -1rem -1rem -0.8rem 0; display: block; color: rgba(0, 0, 0, 0.6); border-left: 1px solid rgba(0, 0, 0, 0.1); height: 3.2rem; width: 3.2rem; text-align: center; line-height: 4rem; }
+                .panel-header .button { float: right; margin: -1rem -1rem -0.8rem 0; display: block; color: rgba(0, 0, 0, 0.6); border-left: 1px solid rgba(0, 0, 0, 0.1); height: 3.2rem; width: calc(3.2rem - 1px); text-align: center; line-height: 4rem; }
                 .panel-header .button i { float: none; margin: 0; }
+
+            /* Channel Close Buttons */
+
+            #channels ul li .button { position: absolute; top: 0; right: 0; bottom: 0; height: calc(1rem - 1px); line-height: 1rem; color: rgba(0, 0, 0, 0.4); background-color: rgb(255, 255, 255); }
+            #channels ul li .button:hover { border-left: 0; color: rgb(255, 255, 255); background-color: #e74c3c; }
+
+            #channels ul li:hover .button { border-left: 1px solid rgba(0, 0, 0, 0.1); }
+
+        .side-panel .content { overflow: auto; height: 100%; }
 
         .side-panel ul { list-style: none; padding: 0; margin: 0; }
 
-            .side-panel ul li { font-size: 0.8em; display: block; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+            .side-panel ul li { font-size: 0.8em; display: block; border-bottom: 1px solid rgba(0, 0, 0, 0.1); position: relative; box-sizing: border-box; }
 
                 .side-panel ul li a { display: block; padding: 0.8rem 1rem; text-decoration: none; color: rgba(0, 0, 0, 0.8); position: relative; }
                 .side-panel ul li a:hover, .panel-header .button:hover { background-color: rgba(0, 0, 0, 0.05); }
@@ -146,6 +156,7 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
             #chat .message .content { padding-right: 0.8rem;  }
 
         /* For /me and channel/server-related messages */
+
         #chat .message.self { font-weight: bold; }
         #chat .message.self .username:after { content: ""; }
 
