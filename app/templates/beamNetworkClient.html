@@ -3,7 +3,7 @@
 
   <div id="channel-name" class="tool-item noselect" ng-bind="clientCtrl.currentChannel"></div>
 
-  <div id="channel-topic" class="tool-item" ng-bind="clientCtrl.topics[clientCtrl.currentChannel]"></div>
+  <div id="channel-topic" class="tool-item" ng-bind-html="clientCtrl.topics[clientCtrl.currentChannel] | linky | browserOpenLink"></div>
 
   <div class="clear"></div>
 

@@ -18,9 +18,9 @@ require('moment').lang('en', {
 
 // Create beam.io module globally.
 angular.module('beam.services', []);
-angular.module('beam.controllers', ['beam.services', 'ngTagsInput']);
-angular.module('beam.directives', ['angularMoment', 'beam.services', 'luegg.directives']);
-angular.module('beam', ['beam.controllers', 'beam.directives', 'beam.services'])
+angular.module('beam.controllers', ['beam.services', 'ngTagsInput',]);
+angular.module('beam.directives', ['angularMoment',  'beam.services', 'luegg.directives',]);
+angular.module('beam', ['beam.controllers', 'beam.directives', 'beam.services', 'ngSanitize',])
   .config(function($logProvider) {
     $logProvider.debugEnabled(true);
   });

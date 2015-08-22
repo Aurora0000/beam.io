@@ -11,8 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron-prebuilt": "~0.31.0",
-    "gulp": "~3.9.0",
-    "gulp-atom-electron": "~0.16.0"
+    "electron-packager": "~5.0.2",
+    "easy-zip": "0.0.4"
   },
   "dependencies": {
     "irc": "~0.3.12",

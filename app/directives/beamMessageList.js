@@ -1,4 +1,11 @@
 angular.module('beam.directives')
+  .filter('browserOpenLink', function($sce, $sanitize) {
+    return function(text) {
+      var regex = /href="([\S]+)"/g;
+      var newString = $sanitize(text).replace(regex, 'href="" onClick="require(\'shell\').openExternal(\'$1\'); return false;"');
+      return $sce.trustAsHtml(newString);
+    };
+  })
   .directive('beamMessageList', function() {
     return {
       restrict: 'E',

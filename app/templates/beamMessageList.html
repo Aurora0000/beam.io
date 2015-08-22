@@ -5,7 +5,7 @@
         <span class="time noselect" am-time-ago="message.time"></span>
 
         <span class="username" ng-bind="::message.nick"></span>
-        <span class="content" ng-bind="::message.message"></span>
+        <span class="content" ng-bind-html="::(message.message | linky:'_blank' | browserOpenLink)"></span>
     </span>
 
 </div>
