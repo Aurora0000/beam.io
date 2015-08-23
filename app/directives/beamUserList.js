@@ -154,10 +154,12 @@ angular.module('beam.directives')
             this.users = this.users.map(function(item) {
               if (item.name === old) {
                 item.name = _new;
+                var identicon = this.genIdenticon(_new);
+                item.identicon = identicon;
               }
 
               return item;
-            });
+            }.bind(this));
 
             // HACK: Tell message list that user has changed nick.
             $rootScope.$broadcast(('nick|' + this.channel), [old, _new]);

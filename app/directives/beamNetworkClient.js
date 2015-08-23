@@ -64,10 +64,6 @@ angular.module('beam.directives')
             this.channels.push(channel);
             $scope.$apply();
             this.currentChannel = channel;
-            // If more than one channel, show close button again. Can remove when we decide what happens when final channel is closed.
-            if(this.channels.length != 1) {
-                $("#channels").removeClass("noclose");
-            }
           }
         }.bind(this));
 
@@ -111,41 +107,26 @@ angular.module('beam.directives')
         }.bind(this);
 
         this.partChannel = function(channel) {
-            
-            // Check if only channel open.
-            if(this.channels.indexOf(channel) == 0 & this.channels.length == 1) {
-                
-                // Close connection? Close window? Destroy the universe?
-                
+          // Check if only channel open.
+          if (this.channels.indexOf(channel) == 0 & this.channels.length == 1) {
+            // Close connection? Close window? Destroy the universe?
+            ;
+          } else {
+            // If not, close channel.
+            this.connection.part(channel);
+
+            // Check if first channel in list.
+            if (this.channels.indexOf(channel) == 0) {
+              // If so, select next channel.
+              this.currentChannel = this.channels[this.channels.indexOf(channel) + 1];
+            } else {
+              // If not, select previous channel.
+              this.currentChannel = this.channels[this.channels.indexOf(channel) - 1];
             }
-            else {
-                
-                // If not, close channel.
-                this.connection.part(channel);
-                
-                // Check if first channel in list.
-                if(this.channels.indexOf(channel) == 0) {
-                    
-                    // If so, select next channel.
-                    this.currentChannel = this.channels[this.channels.indexOf(channel) + 1];
-                    
-                }
-                else {
-                    
-                    // If not, select previous channel.
-                    this.currentChannel = this.channels[this.channels.indexOf(channel) - 1];
-                    
-                }
-                
-                // Remove channel tab.
-                this.removeTab(channel);
-                
-                // If only one channel remaining, hide close button. Can remove when we decide what happens when final channel is closed.
-                if(this.channels.length == 1) {
-                    $("#channels").addClass("noclose");
-                }
-                
-            }
+
+            // Remove channel tab.
+            this.removeTab(channel);
+          }
         }.bind(this);
 
         this.showModal = function() {

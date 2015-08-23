@@ -14,6 +14,7 @@ angular.module('beam.controllers')
         configService.set('port', $scope.settings.port);
         configService.set('user', $scope.settings.user);
         configService.set('real', $scope.settings.real);
+        configService.set('ignoreSecure', $scope.settings.ignoreSecure);
       } else {
         configService.set('port', $scope.settings.tls ? 6697 : 6667);
       }

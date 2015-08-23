@@ -14,7 +14,7 @@
   <!-- Server and channel-related functionality. -->
   <div class="sidebar left">
     <!-- Channel list. -->
-    <div id="channels" class="side-panel">
+    <div id="channels" class="side-panel" ng-class="{noclose: clientCtrl.channels.length <= 1}">
       <span class="panel-header">
         <i class="material-icons md-24">input</i> Channels
         <a href="" class="button" title="Join Channel">
