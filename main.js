@@ -26,8 +26,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
       width: 800,
       height: 600,
-      'min-width': 800,
-      'min-height': 600,
+      'min-width': 700,
+      'min-height': 500,
   });
   mainWindow.loadUrl('file://' + __dirname + '/app/views/chat.html');
 

@@ -21,6 +21,9 @@
           <i class="material-icons md-24">add</i>
         </a>
       </span>
+        
+      <div class="content">
+        
       <ul>
         <li ng-repeat="channel in clientCtrl.channels" ng-class="{current: clientCtrl.currentChannel === channel}" ng-click="clientCtrl.setActiveChannel(channel)">
           <a href="" ng-bind="channel"></a>
@@ -29,6 +32,8 @@
             </a>
         </li>
       </ul>
+            
+      </div>
     </div>
 
   </div>

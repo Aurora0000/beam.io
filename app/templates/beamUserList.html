@@ -3,6 +3,7 @@
         <i class="material-icons">people</i>
         Users <span class="count">{{userListCtrl.users.length}}</span>
     </span>
+    <div class="content">
     <ul>
         <li class="user" ng-repeat="user in userListCtrl.users | orderBy: 'name' | orderBy: userListCtrl.orderFunction"><a href="">
             <span class="avatar"><img ng-src="{{'data:image/png;base64,' + user.identicon}}"/></span>
@@ -10,4 +11,5 @@
             <span class="role" ng-class="{op: user.mode === '@', owner: user.mode === '~', halfop: user.mode === '%', voice: user.mode === '+'}"></span>
         </a></li>
     </ul>
+    </div>
 </div>
