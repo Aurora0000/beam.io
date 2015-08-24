@@ -5,23 +5,23 @@
 
 Looking for [:arrow_down:releases](https://github.com/Aurora0000/beam.io/releases)? Available for Windows, Linux and Mac OS X.
 
-Beam.io is an IRC client powered by 
-[GitHub Electron](https://github.com/atom/electron), 
-[Node.js](https://nodejs.org) and open web technologies such as HTML5, CSS3 
+Beam.io is an IRC client powered by
+[GitHub Electron](https://github.com/atom/electron),
+[Node.js](https://nodejs.org) and open web technologies such as HTML5, CSS3
 and JavaScript (ES5 and AngularJS).
 
 
 ## :question: Why choose to use beam.io?
-Since its creation in 1988 (27 years ago!), IRC has been one of the greatest 
+Since its creation in 1988 (27 years ago!), IRC has been one of the greatest
 and most widely supported chat protocols ever. However, IRC clients themselves
 have barely changed, looking almost no different from 10 years ago, and only
-barely different from the oldest clients such as 
+barely different from the oldest clients such as
 [ircII](https://upload.wikimedia.org/wikipedia/commons/9/94/Ircii.png).
 
-So, we set out to create a modern, user-friendly client that would be 
-aesthetically pleasing, while remaining practical and streamlined so that 
+So, we set out to create a modern, user-friendly client that would be
+aesthetically pleasing, while remaining practical and streamlined so that
 it's still easy to chat with others. In addition to all of this, we wanted to
-make the client cross-platform, fast and quick to set up. This led to the 
+make the client cross-platform, fast and quick to set up. This led to the
 creation of beam.io, which we hope has all of these features, and more.
 
 ## :star: Current Features
@@ -58,16 +58,17 @@ electron .
 ### :package: Packaging beam.io
 (assuming build dependencies installed already)
 ```bash
-npm i gulp -g
-gulp package-platform-arch
-(e.g. gulp package-linux-x64)
+npm i electron-packager -g
+./build.js platform arch
+(valid platforms: windows, darwin, linux,
+ valid archs: x86, x64)
 ```
 
-Releases are dropped into releases/beam-platform-arch.zip. **Do not commit 
+Releases are dropped into releases/beam-platform-arch.zip. **Do not commit
 release zips**!
 
 ### :octocat: Collaborating
-Pull requests are welcome. All code must be in ES5 (that means no 
+Pull requests are welcome. All code must be in ES5 (that means no
 CoffeeScript, no TypeScript, no ES6!).
 
 
