@@ -51,7 +51,7 @@ angular.module('beam.directives')
           if (to === this.connection.nick) {
             var os = require('os');
             var platform = os.platform() + ' ' + os.arch();
-            this.connection.ctcp(from, 'notice', 'VERSION beam.io v0.1.0-a2 on ' + platform);
+            this.connection.ctcp(from, 'notice', 'VERSION beam.io v0.1.0-a3 on ' + platform);
           }
         }.bind(this));
 
@@ -74,13 +74,10 @@ angular.module('beam.directives')
           }
         }.bind(this));
 
-        this.connection.on('message', function(nick, to, text) {
-          if (to === this.connection.nick) {
-            // Private message, pass on to PM tab (if created)
-            this.addChannel(nick);
-            $scope.$apply();
-            $rootScope.$broadcast(('message|' + nick), text);
-          }
+        this.connection.on('pm', function(nick, text) {
+          this.addChannel(nick);
+          $scope.$apply();
+          $rootScope.$broadcast(('message|' + nick), text);
         }.bind(this));
 
         // Called on /msg
@@ -92,7 +89,7 @@ angular.module('beam.directives')
         this.addChannel = function(channel) {
           if (this.channels.indexOf(channel) === -1) {
             this.channels.push(channel);
-            this.topics[channel] = {};
+            this.topics[channel] = '';
           }
         };
 
