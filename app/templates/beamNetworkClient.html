@@ -21,18 +21,18 @@
           <i class="material-icons md-24">add</i>
         </a>
       </span>
-        
+
       <div class="content">
-        
-      <ul>
-        <li ng-repeat="channel in clientCtrl.channels" ng-class="{current: clientCtrl.currentChannel === channel}" ng-click="clientCtrl.setActiveChannel(channel)">
-          <a href="" ng-bind="channel"></a>
+
+        <ul>
+          <li ng-repeat="channel in clientCtrl.channels" ng-class="{current: clientCtrl.currentChannel === channel}" ng-click="clientCtrl.setActiveChannel(channel)">
+            <a href="" ng-bind="channel"></a>
             <a href="" class="button" ng-click="clientCtrl.partChannel(channel)" title="Close Channel">
-                <i class="material-icons md-18">close</i>
+              <i class="material-icons md-18">close</i>
             </a>
-        </li>
-      </ul>
-            
+          </li>
+        </ul>
+
       </div>
     </div>
 
@@ -41,8 +41,11 @@
   <beam-channel ng-repeat="channel in clientCtrl.channels" host="{{clientCtrl.host}}" channel="{{channel}}" ng-show="clientCtrl.currentChannel === '{{channel}}'"></beam-channel>
 
 </div>
-<div ng-show="!clientCtrl.connected">
-  <h1>Connecting to
-    <span ng-bind="::clientCtrl.host"></span>
-  </h1>
+
+<div id="connect-message" ng-show="!clientCtrl.connected">
+  <div class="loader"></div>
+  <div class="load-message">
+    Connecting to
+    <span ng-bind="::clientCtrl.host"></span>...
+  </div>
 </div>
