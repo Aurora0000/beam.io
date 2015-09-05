@@ -12,6 +12,8 @@ angular.module('beam.directives')
         this.channels = [];
         this.topics = {};
         this.currentChannel = '';
+        this.connectionClosed = true;
+        this.connectionError = 'Unknown error';
 
         this.onRegistered = function() {
           this.connected = true;
@@ -57,6 +59,15 @@ angular.module('beam.directives')
 
         this.connection.on('error', function(message) {
           console.log('Error in IRC library: ', message);
+        }.bind(this));
+
+        this.connection.conn.addListener('close', function() {
+          this.connectionClosed = true;
+        }.bind(this));
+
+        this.connection.conn.addListener('error', function(err) {
+          this.connectionError = err;
+          $scope.$apply();
         }.bind(this));
 
         this.connection.on('join', function(channel, nick) {

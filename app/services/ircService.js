@@ -13,6 +13,7 @@ angular.module('beam.services')
         certExpired: (settings.ignoreSecure || false),
         selfSigned: (settings.ignoreSecure || false),
         channels: (settings.channels || []),
+        debug: true,
       };
       this.connections[settings.host] = new irc.Client(settings.host,
         settings.nick, this.settings[settings.host]);
