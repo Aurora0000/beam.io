@@ -2,7 +2,7 @@
     <!-- Template for a /me or channel/server-related message. -->
     <span class="message" ng-repeat="message in messageListCtrl.messages" ng-class="{self: message.type === 'action'}">
         <span class="avatar"><img ng-src="{{::('data:image/png;base64,' + message.identicon)}}"/></span>
-        <span class="time noselect" am-time-ago="message.time"></span>
+        <abbr ng-attr-title="{{::message.time | amDateFormat: 'Do MMMM YYYY, H:mm:ss'}}" class="time noselect" am-time-ago="message.time"></abbr>
 
         <span class="username" ng-bind="::message.nick"></span>
         <span class="content" ng-bind-html="::(message.message | linky:'_blank' | browserOpenLink)"></span>

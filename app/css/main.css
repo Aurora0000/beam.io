@@ -213,7 +213,7 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
             #chat .message .username { font-weight: bold; }
             #chat .message .username:after { content: ":"; }
 
-            #chat .message .time { display: block; float: right; right: 0; top: 0.8rem; padding-left: 0.8rem; text-align: center; font-size: 0.7rem; color: rgba(0, 0, 0, 0.4); }
+            #chat .message .time { border: none; display: block; float: right; right: 0; top: 0.8rem; padding-left: 0.8rem; text-align: center; font-size: 0.7rem; color: rgba(0, 0, 0, 0.4); }
             #chat .message:first-of-type .time { top: 0; }
 
             #chat .message .content { padding-right: 0.8rem;  }
