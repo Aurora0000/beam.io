@@ -10,6 +10,7 @@ Beam.io is an IRC client powered by
 [Node.js](https://nodejs.org) and open web technologies such as HTML5, CSS3
 and JavaScript (ES5 and AngularJS).
 
+![beam.io v0.1.0-alpha4](http://imgur.com/DXuHEOV.jpg)
 
 ## :question: Why choose to use beam.io?
 Since its creation in 1988 (27 years ago!), IRC has been one of the greatest
