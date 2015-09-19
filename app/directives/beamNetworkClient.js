@@ -14,6 +14,11 @@ angular.module('beam.directives')
         this.currentChannel = '';
         this.connectionClosed = true;
         this.connectionError = 'Unknown error';
+        this.showChannelModal = false;
+
+        this.displayChannelModal = function() {
+          this.showChannelModal = true;
+        }.bind(this);
 
         this.onRegistered = function() {
           this.connected = true;
@@ -108,10 +113,10 @@ angular.module('beam.directives')
           this.currentChannel = channel;
         }.bind(this);
 
-        this.joinChannel = function() {
-          this.connection.join($scope.channel);
-          $scope.channel = '';
-          $('.ui.modal').modal('hide');
+        this.joinChannel = function(channel) {
+          this.connection.join($scope.channelToJoin);
+          $scope.channelToJoin = '';
+          this.showChannelModal = false;
         }.bind(this);
 
         this.partChannel = function(channel) {

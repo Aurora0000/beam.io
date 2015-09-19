@@ -1,21 +1,21 @@
 <!-- Channel joining modal. -->
-<div class="modal" id="join-channel-modal">
-    
+<div class="modal" ng-class="{show: clientCtrl.showChannelModal === true}" id="join-channel-modal">
+
     <div class="inner">
-        
+
         <span class="modal-header noselect">Join a Channel</span>
         <span class="modal-description noselect">Enter the name of the channel you would like to join.</span>
-        
-        <input type="text" class="modal-text" value="" />
-        
-        <button class="modal-button">Join Channel</button>
-        
+        <form>
+          <input type="text" class="modal-text" ng-model="channelToJoin" value="" />
+
+          <button class="modal-button" ng-click="clientCtrl.joinChannel()">Join Channel</button>
+        </form>
     </div>
-    
+
 </div>
-    
+
 <!-- Overlay to be displayed when any modal is active (use "show" class). -->
-<div id="overlay" class=""></div>
+<div id="overlay" ng-class="{show: clientCtrl.showChannelModal === true}"></div>
 
 <!-- For storing channel-related information and functionality. -->
 <div id="toolbar" ng-show="clientCtrl.connected">
@@ -36,7 +36,7 @@
     <div id="channels" class="side-panel" ng-class="{noclose: clientCtrl.channels.length <= 1}">
       <span class="panel-header">
         <i class="material-icons md-24">input</i> Channels
-        <a href="" class="button" title="Join Channel">
+        <a href="" ng-click="clientCtrl.displayChannelModal()" class="button" title="Join Channel">
           <i class="material-icons md-24">add</i>
         </a>
       </span>
