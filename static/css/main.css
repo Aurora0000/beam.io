@@ -249,8 +249,7 @@ html, body, #wrapper { height: 100%; overflow: hidden; }
 
     .modal .inner { width: 40em; margin: 0 auto; height: 100%; box-sizing: border-box; padding: 3em; }
 
+        .modal-header { font-size: 2em; }
         .modal-description { font-size: 1em; color: rgb(150, 150, 150); clear: both; display: block; margin-top: 0.2em; }
         .modal-text { padding: 0.5em; width: calc(100% - 1em); clear: both; margin: 1.5em 0; border: 1px solid #ccc; }
         .modal-button { padding: 1em; float: right; font-size: 0.8em; width: auto;  font-weight: normal; }
-
-.modal-header { font-size: 2em; }
