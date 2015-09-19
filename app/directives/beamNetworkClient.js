@@ -113,10 +113,16 @@ angular.module('beam.directives')
           this.currentChannel = channel;
         }.bind(this);
 
-        this.joinChannel = function(channel) {
+        this.joinChannel = function() {
+          if ($scope.channelToJoin == '' || $scope.channelToJoin == null) {
+            $scope.showChannelModal = false;
+            return;
+          }
+
           if (!$scope.channelToJoin.startsWith('#')) {
             $scope.channelToJoin = '#' + $scope.channelToJoin;
           }
+
           this.connection.join($scope.channelToJoin);
           $scope.channelToJoin = '';
           this.showChannelModal = false;
